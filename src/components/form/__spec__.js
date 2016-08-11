@@ -167,6 +167,36 @@ describe('Form', () => {
         expect(spy).toHaveBeenCalled();
       });
     });
+
+    describe('when a onSubmit prop is passed', () => {
+      describe('and the form is valid', () => {
+        it('calls the onSubmit prop', () => {
+          let spy = jasmine.createSpy('spy');
+          instance = TestUtils.renderIntoDocument(
+            <Form onSubmit={ spy }>
+              <Textbox validations={ [new Validation()] } name='test' value='Valid' />
+            </Form>
+          );
+          let form = TestUtils.findRenderedDOMComponentWithTag(instance, 'form');
+          TestUtils.Simulate.submit(form);
+          expect(spy).toHaveBeenCalled();
+        });
+      });
+
+      describe('and the form is invalid', () => {
+        it('does not call the onSubmit prop', () => {
+          let spy = jasmine.createSpy('spy');
+          instance = TestUtils.renderIntoDocument(
+            <Form onSubmit={ spy }>
+              <Textbox validations={ [new Validation()] } name='test' value='' />
+            </Form>
+          );
+          let form = TestUtils.findRenderedDOMComponentWithTag(instance, 'form');
+          TestUtils.Simulate.submit(form);
+          expect(spy).not.toHaveBeenCalled();
+        });
+      });
+    });
   });
 
   describe('validate', () => {
@@ -396,22 +426,34 @@ describe('Form', () => {
 
     describe('Cancel Button', () => {
       describe('when cancel prop is false', () => {
-        beforeEach(() => {
-          instance = TestUtils.renderIntoDocument(
-            <Form cancel={false} />
-          );
-        });
-
         it('does not show a cancel button', () => {
-          let buttons = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'button')
+          let instance = TestUtils.renderIntoDocument(<Form cancel={ false } />);
+          let buttons = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'button');
           expect(buttons.length).toEqual(1);
         });
       });
 
       describe('when cancel props is true (default)', () => {
         it('does show a cancel button', () => {
-          let buttons = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'button')
-          expect(buttons.length).toEqual(2);
+          let buttons = TestUtils.findRenderedDOMComponentWithClass(instance, 'ui-form__cancel');
+          expect(buttons).toBeDefined();
+        });
+      });
+    });
+
+    describe('Save Button', () => {
+      describe('when save is true or is not set to false', () => {
+        it('shows a save button', () => {
+          let instance = TestUtils.renderIntoDocument(<Form save={ true }/>);
+          let button = TestUtils.findRenderedDOMComponentWithClass(instance, 'ui-form__save')
+        });
+      });
+
+      describe('when save is set to false', () => {
+        it('does not show a save button', () => {
+          let instance = TestUtils.renderIntoDocument(<Form save={ false }/>);
+          let buttons = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'button');
+          expect(buttons.length).toEqual(1);
         });
       });
     });

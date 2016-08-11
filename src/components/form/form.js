@@ -119,11 +119,37 @@ class Form extends React.Component {
      * @property onCancel
      * @type {Function}
      */
-    onCancel: React.PropTypes.func
+    onCancel: React.PropTypes.func,
+
+    /**
+     * Hide or show the save button
+     *
+     * @property saveFalse
+     * @type {Boolean}
+     */
+    save: React.PropTypes.bool,
+
+    /**
+     * Additional actions rendered next to the save and cancel buttons
+     *
+     * @property additionalActions
+     * @type {String|JSX}
+     */
+    additionalActions: React.PropTypes.node,
+
+    /**
+     * Custom callback for when form will submit
+     *
+     * @property onSubmit
+     * @type {Function}
+     */
+    onSubmit: React.PropTypes.func
   }
 
   static defaultProps = {
+    buttonAlign: 'right',
     cancel: true,
+    save: true,
     saving: false,
     validateOnMount: false
   }
@@ -284,6 +310,10 @@ class Form extends React.Component {
     if (this.props.afterFormValidation) {
       this.props.afterFormValidation(ev, valid);
     }
+
+    if (valid && this.props.onSubmit) {
+      this.props.onSubmit(ev);
+    }
   }
 
   /**
@@ -329,7 +359,7 @@ class Form extends React.Component {
    * @return {Object} props for form element
    */
   htmlProps = () => {
-    let { ...props } = this.props;
+    let { onSubmit, ...props } = this.props;
     props.className = this.mainClasses;
     return props;
   }
@@ -367,6 +397,13 @@ class Form extends React.Component {
     );
   }
 
+  get buttonClasses() {
+    return classNames(
+      'ui-form__buttons',
+      `ui-form__buttons--${ this.props.buttonAlign }`
+    );
+  }
+
   /**
    * Gets the cancel button for the form
    *
@@ -383,28 +420,64 @@ class Form extends React.Component {
     </div>);
   }
 
-   /**
+  get additionalActions() {
+    return (
+      <div className='ui-form__additional-actions' >
+        { this.props.additionalActions }
+      </div>
+    );
+  }
+
+  /**
+   * Gets the save button for the form
+   * @method saveButton
+   * @return {Object} JSX save button
+   */
+  get saveButton() {
+    let errorCount;
+
+    let saveClasses = classNames(
+      "ui-form__save",
+        {
+          "ui-form__save--invalid": this.state.errorCount || this.state.warningCount
+        }
+    );
+
+    if (this.state.errorCount || this.state.warningCount) {
+      // set error message (allow for HTML in the message - https://facebook.github.io/react/tips/dangerously-set-inner-html.html)
+      errorCount = (
+        <span
+          className="ui-form__summary"
+          dangerouslySetInnerHTML={ renderMessage(this.state.errorCount, this.state.warningCount) }
+        />
+      );
+    }
+
+    return (
+      <div className={ saveClasses }>
+        { errorCount }
+        <Button as="primary" disabled={ this.props.saving }>
+          { this.props.saveText || I18n.t('actions.save', { defaultValue: 'Save' }) }
+        </Button>
+      </div>
+    );
+  }
+
+  /**
    * Renders the component.
    *
    * @method render
    * @return {Object} JSX form
    */
   render() {
-    let cancelButton,
-        errorCount,
-        saveClasses = "ui-form__save";
-
-    if (this.state.errorCount || this.state.warningCount) {
-      // set error message (allow for HTML in the message - https://facebook.github.io/react/tips/dangerously-set-inner-html.html)
-      errorCount = (
-        <span className="ui-form__summary" dangerouslySetInnerHTML={ renderMessage(this.state.errorCount, this.state.warningCount) } />
-      );
-
-      saveClasses += " ui-form__save--invalid";
-    }
+    let cancelButton, saveButton;
 
     if (this.props.cancel) {
       cancelButton = this.cancelButton;
+    }
+
+    if (this.props.save) {
+      saveButton = this.saveButton;
     }
 
     return (
@@ -413,15 +486,10 @@ class Form extends React.Component {
 
         { this.props.children }
 
-        <div className="ui-form__buttons">
-          <div className={ saveClasses }>
-            { errorCount }
-            <Button as="primary" disabled={ this.props.saving }>
-              { this.props.saveText || I18n.t('actions.save', { defaultValue: 'Save' }) }
-            </Button>
-          </div>
-
+        <div className={ this.buttonClasses }>
+          { saveButton }
           { cancelButton }
+          { this.additionalActions }
         </div>
       </form>
     );
