@@ -1,0 +1,20 @@
+.demo__preview {
+  padding: 20px;
+}
+
+.demo__suppress-errors {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  margin: 0 8px 0 0;
+  text-align: right;
+
+  .common-input__label {
+    color: #FFF;
+  }
+
+  .carbon-checkbox + .carbon-checkbox {
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
