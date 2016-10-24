@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Code from './../../components/code';
+import Config from './../../components/config';
 import { transform } from 'babel-standalone';
 import Textbox from 'components/textbox';
 import Row from 'components/row';
@@ -25,6 +26,10 @@ class Demo extends React.Component {
     suppressWarnings: false
   }
 
+  errorMarkup = (msg) => {
+    return <div className="demo__error">{ msg }</div>;
+  }
+
   renderDemo = () => {
     let target = this.refs.demo;
 
@@ -32,17 +37,30 @@ class Demo extends React.Component {
       try {
         let component = eval(transform(this.code(), { presets: ['es2015', 'react'] }).code);
         ReactDOM.render(component, target);
-        this.cachedCode = component;
+        setTimeout(() => {
+          if (this.lastError) {
+            this.handleError(this.lastError);
+          } else {
+            this.cachedCode = component;
+          }
+        }, 0);
       } catch(err) {
-        if (!this.state.suppressWarnings && this.lastError) {
-          ReactDOM.render(<div style={{ color: "red" }}>{ this.lastError }</div>, target);
-          this.lastError = null;
-        } else if (!this.state.suppressSyntaxErrors && err._babel) {
-          ReactDOM.render(<div style={{ color: "red" }}>{ err.message }</div>, target);
-        } else {
-          ReactDOM.render(this.cachedCode, target);
-        }
+        this.handleError(err);
       }
+    }
+  }
+
+  handleError = (err) => {
+    let target = this.refs.demo;
+
+    if (!this.state.suppressWarnings && this.lastError) {
+      target.removeChild(target.children[0]);
+      ReactDOM.render(this.errorMarkup(this.lastError), target);
+      this.lastError = null;
+    } else if (!this.state.suppressSyntaxErrors && err._babel) {
+      ReactDOM.render(this.errorMarkup(err.message), target);
+    } else {
+      ReactDOM.render(this.cachedCode, target);
     }
   }
 
@@ -54,6 +72,10 @@ class Demo extends React.Component {
     this.setState({ suppressWarnings: !this.state.suppressWarnings });
   }
 
+  resetCode = () => {
+    this.setState({ customCode: null });
+  }
+
   updateCode = (ev) => {
     this.setState({ customCode: ev.target.value });
   }
@@ -62,16 +84,26 @@ class Demo extends React.Component {
     return this.state.customCode || this.props.code;
   }
 
+  config = () => {
+    if (!this.props.config) { return null; }
+
+    return (
+      <Config disabled={ this.state.customCode } onReset={ this.resetCode }>
+        { this.props.config }
+      </Config>
+    );
+  }
+
   /**
    * @method render
    */
   render() {
     return (
       <div className="demo">
-        <Row>
-          <div ref="demo" className="demo__preview" />
+        <div ref="demo" className="demo__preview" />
 
-          <div>
+        <Row>
+          <div className="demo__code">
             <div className="demo__suppress-errors">
               <Checkbox
                 label="Suppress syntax errors"
@@ -93,6 +125,8 @@ class Demo extends React.Component {
               onChange={ this.updateCode }
             />
           </div>
+
+          { this.config() }
         </Row>
       </div>
     );

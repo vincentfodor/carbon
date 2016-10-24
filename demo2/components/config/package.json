@@ -1,0 +1,4 @@
+{
+  "main": "./config.js",
+  "style": "./config.scss"
+}

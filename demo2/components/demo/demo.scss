@@ -1,3 +1,5 @@
+@import "colors";
+
 .demo__preview {
   padding: 20px;
 }
@@ -17,4 +19,13 @@
     margin-top: 0;
     padding-top: 0;
   }
+}
+
+.demo__code {
+  position: relative;
+}
+
+.demo__error {
+  color: $error;
+  white-space: pre-wrap;
 }

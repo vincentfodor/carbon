@@ -1,0 +1,17 @@
+.config {
+  position: relative;
+}
+
+.config__disabled {
+  background-color: rgba(44, 45, 47, 0.9);
+  bottom: 0;
+  min-height: 62px;
+  color: #FFF;
+  left: 0;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  z-index: 10;
+}
