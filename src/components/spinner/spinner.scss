@@ -13,7 +13,7 @@
 
 $std-speed: 0.7s;
 
-.carbon-spinner {
+.carbon-spinner--standard {
   @include animation(rotate360 $std-speed linear forwards infinite);
   border-radius: 50%;
   box-sizing: content-box;
@@ -21,24 +21,129 @@ $std-speed: 0.7s;
 }
 
 @mixin spinner-theme($type, $color, $border, $background, $color-hover) {
-  .carbon-spinner--#{$type} {
+  .carbon-spinner--standard--#{$type} {
     border-style: solid;
     border-top-color: rgba( $color, 1);
     border-bottom-color: rgba( $color, .5);
     border-right-color: rgba( $color, .3 );
     border-left-color: rgba( $color, .7 );
   }
+
+  // Name, color, size, speed, thick border, thing border
+  $spinnerSizeSets: (
+    ("extra-small", $color, 8px, 1s, 5px, 1px),
+    ("small", $color, 12px, 1s, 5px, 1px),
+    ("medium-small", $color, 20px, 1s, 5px, 1px),
+    ("medium", $color, 25px, 1s, 5px, 1px),
+    ("medium-large", $color, 32px, 1s, 5px, 1px),
+    ("large", $color, 40px, 1s, 5px, 1px),
+    ("extra-large", $color, 45px, 1s, 5px, 1px),
+  );
+
+  @each $set in $spinnerSizeSets {
+    @include spinner-advanced($type, $set...);
+  }
+}
+
+@mixin spinner-advanced($type, $presetSize, $color, $size, $speed, $thick_border, $thin_border) {
+  // // @debug ($type, $presetSize, $color, $size, $speed, $thick_border, $thin_border);
+  // @include animation(rotate260 $speed linear forwards infinite);
+  //
+  // // info, warning, error
+  // .carbon-spinner--advanced--#{$type}.carbon-spinner--advanced--#{$presetSize} {
+  //   clip: rect(0, $size, $size, $size/2);
+  //   height: $size;
+  //   left: 50%;
+  //   margin-left: -$size/2;
+  //   position: absolute;
+  //   top: 0px;
+  //   width: $size;
+  //
+  //   &:after {
+  //     @include keyframes(animateBorder) {
+  //       0% {
+  //         @include box-shadow(inset $color 0 0 0 $thick_border);
+  //         @include transform(rotate(-180deg));
+  //       }
+  //
+  //       50% {
+  //         @include box-shadow(inset lighten( $color, 10% ) 0 0 0 $thin_border);
+  //       }
+  //
+  //       100% {
+  //         @include box-shadow(inset $color 0 0 0 $thick_border);
+  //         @include transform(rotate(180deg));
+  //       }
+  //     }
+  //
+  //     @include animation(animateBorder $speed ease-in-out forwards infinite);
+  //     @include border-radius(50%);
+  //
+  //     clip: rect(0, $size, $size, $size/2);
+  //     content: '';
+  //     height: $size;
+  //     left: 0px;
+  //     position: absolute;
+  //     top: 0px;
+  //     width: $size;
+  //   }
+  // }
 }
 
 @each $set in $colorIconSets {
-    @include spinner-theme($set...);
+  @include spinner-theme($set...);
 }
 
-.carbon-spinner--extra-small    { width: 8px; height: 8px; border-width: 2px }
-.carbon-spinner--small          { width: 12px; height: 12px; border-width: 3px }
-.carbon-spinner--medium-small   { width: 20px; height: 20px; border-width: 5px }
-.carbon-spinner--medium         { width: 25px; height: 25px; border-width: 6px }
-.carbon-spinner--medium-large   { width: 32px; height: 32px; border-width: 8px }
-.carbon-spinner--large          { width: 40px; height: 40px; border-width: 10px }
-.carbon-spinner--extra-large    { width: 45px; height: 45px; border-width: 11px }
+.carbon-spinner--standard--extra-small    { width: 8px; height: 8px; border-width: 2px }
+.carbon-spinner--standard--small          { width: 12px; height: 12px; border-width: 3px }
+.carbon-spinner--standard--medium-small   { width: 20px; height: 20px; border-width: 5px }
+.carbon-spinner--standard--medium         { width: 25px; height: 25px; border-width: 6px }
+.carbon-spinner--standard--medium-large   { width: 32px; height: 32px; border-width: 8px }
+.carbon-spinner--standard--large          { width: 40px; height: 40px; border-width: 10px }
+.carbon-spinner--standard--extra-large    { width: 45px; height: 45px; border-width: 11px }
 
+
+.carbon-spinner--advanced--info.carbon-spinner--advanced--medium {
+    $size: 25px;
+    $color: red;
+    $thick_border: 5px;
+    $thin_border: 1px;
+    $speed: 1s;
+
+    // clip: rect(0, $size, $size, $size/2);
+    // height: $size;
+    // left: 50%;
+    // margin-left: -$size/2;
+    // position: absolute;
+    // top: 0px;
+    // width: $size;
+
+    &:after {
+      @include keyframes(animateBorder) {
+        0% {
+          @include box-shadow(inset $color 0 0 0 $thick_border);
+          @include transform(rotate(-140deg));
+        }
+
+        50% {
+          @include box-shadow(inset lighten( $color, 10% ) 0 0 0 $thin_border);
+        }
+
+        100% {
+          @include box-shadow(inset $color 0 0 0 $thick_border);
+          @include transform(rotate(140deg));
+        }
+      }
+
+      @include animation(animateBorder $speed ease-in-out forwards infinite);
+      @include border-radius(50%);
+
+      clip: rect(0, $size, $size, $size/2);
+      content: '';
+      height: $size;
+      left: 0px;
+      position: absolute;
+      top: 0px;
+      width: $size;
+    }
+}

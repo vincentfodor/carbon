@@ -49,7 +49,8 @@ class Spinner extends React.Component {
 
   static defaultProps = {
     as: 'info',
-    size: 'medium'
+    size: 'medium',
+    model: 'advanced'
   };
 
   /**
@@ -61,8 +62,9 @@ class Spinner extends React.Component {
   get spinnerClasses() {
     return classNames(
       'carbon-spinner',
-      'carbon-spinner--'+ this.props.as,
-      'carbon-spinner--' + this.props.size,
+      'carbon-spinner--' + this.props.model,
+      'carbon-spinner--' + this.props.model + '--' + this.props.as,
+      'carbon-spinner--' + this.props.model + '--' + this.props.size,
       this.props.className
     );
   }
