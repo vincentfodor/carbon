@@ -93,11 +93,13 @@ class Step extends React.Component {
    * @return {void}
    */
   handleOnNext = (ev) => {
+    let goNext = true;
+
     if (this.props.beforeNext) {
-      this.props.beforeNext(ev);
+      goNext = this.props.beforeNext(ev);
     }
 
-    if (this.props.defaultButton) {
+    if (goNext && this.props.defaultButton) {
       this.wizard.next();
     }
   };
@@ -109,11 +111,13 @@ class Step extends React.Component {
    * @return {void}
    */
   handleOnBack = (ev) => {
+    let goBack = true;
+
     if (this.props.beforeBack) {
-      this.props.beforeBack(ev);
+      goBack = this.props.beforeBack(ev);
     }
 
-    if (this.props.defaultButton) {
+    if (goBack && this.props.defaultButton) {
       this.wizard.back();
     }
   };
