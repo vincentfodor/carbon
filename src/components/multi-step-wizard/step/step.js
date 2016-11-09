@@ -34,6 +34,22 @@ class Step extends React.Component {
     defaultButton: React.PropTypes.bool,
 
     /**
+     * Custom function that is called immediately before moving the step forward
+     *
+     * @property beforeNext
+     * @type {Function}
+     */
+    beforeNext: React.PropTypes.func,
+
+    /**
+     * Custom function that is called immediately before moving the step backward
+     *
+     * @property beforeBack
+     * @type {Function}
+     */
+    beforeBack: React.PropTypes.func,
+
+    /**
      * Additional buttons
      *
      * @property extraButtons
@@ -76,7 +92,11 @@ class Step extends React.Component {
    * @method handleOnNext
    * @return {void}
    */
-  handleOnNext = () => {
+  handleOnNext = (ev) => {
+    if (this.props.beforeNext) {
+      this.props.beforeNext(ev);
+    }
+
     if (this.props.defaultButton) {
       this.wizard.next();
     }
@@ -88,7 +108,11 @@ class Step extends React.Component {
    * @method handleOnBack
    * @return {void}
    */
-  handleOnBack = () => {
+  handleOnBack = (ev) => {
+    if (this.props.beforeBack) {
+      this.props.beforeBack(ev);
+    }
+
     if (this.props.defaultButton) {
       this.wizard.back();
     }

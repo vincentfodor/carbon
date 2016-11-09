@@ -135,8 +135,6 @@ class MultiStepWizard extends React.Component {
   getChildContext() {
     return {
       wizard: {
-        nextHandler: this.props.onNext,
-        backHandler: this.props.onBack,
         submitHandler: this.props.onSubmit,
         enableInactiveSteps: this.props.enableInactiveSteps,
         currentStep: this.state.currentStep,
