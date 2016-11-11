@@ -5,6 +5,7 @@ import InputValidation from './../../utils/decorators/input-validation';
 import InputIcon from './../../utils/decorators/input-icon';
 import classNames from 'classnames';
 import Events from './../../utils/helpers/events';
+import Option from './option';
 
 /**
  * A dropdown widget.
@@ -45,16 +46,6 @@ class Dropdown extends React.Component {
      */
     this.blockBlur = false;
 
-    /**
-     * Variable to cache current value.
-     * Setting it here rather than state prevents complete rerender when value changes.
-     *
-     * @property visibleValue
-     * @type {String}
-     * @default ''
-     */
-    this.visibleValue = '';
-
     // bind scope to functions - allowing them to be overridden and
     // recalled with the use of super
     this.selectValue = this.selectValue.bind(this);
@@ -81,7 +72,9 @@ class Dropdown extends React.Component {
      * @property options
      * @type {object}
      */
-    options: React.PropTypes.object.isRequired
+    options: React.PropTypes.object,
+
+    visibleValue: React.PropTypes.string
   }
 
   state = {
@@ -104,6 +97,28 @@ class Dropdown extends React.Component {
     highlighted: null
   }
 
+  static childContextTypes = {
+    /**
+     * Defines a context object for child components of the form component.
+     * https://facebook.github.io/react/docs/context.html
+     *
+     * @property form
+     * @type {Object}
+     */
+    dropdown: React.PropTypes.object
+  }
+
+  getChildContext = () => {
+    return {
+      dropdown: {
+        handleSelect: this.handleSelect,
+        handleMouseOverListItem: this.handleMouseOverListItem,
+        highlighted: this.state.highlighted,
+        selected: this.props.value
+      }
+    };
+  }
+
   /**
    * Manually focus if autoFocus is applied - allows us to prevent the list from opening.
    *
@@ -113,19 +128,6 @@ class Dropdown extends React.Component {
     if (this.props.autoFocus) {
       this.blockFocus = true;
       this._input.focus();
-    }
-  }
-
-  /**
-   * Clears the visible value if a new value has been selected.
-   *
-   * @method componentWillReceiveProps
-   * @param {Object} nextProps the updated props
-   */
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.value != this.props.value) {
-      // clear the cache
-      this.visibleValue = null;
     }
   }
 
@@ -166,8 +168,8 @@ class Dropdown extends React.Component {
    * @method handleSelect
    * @param {Object} ev event
    */
-  handleSelect = (ev) => {
-    this.selectValue(ev.currentTarget.getAttribute('value'), ev.currentTarget.textContent);
+  handleSelect = (value, ev) => {
+    this.selectValue(value, ev.currentTarget.textContent);
   }
 
   /**
@@ -176,8 +178,8 @@ class Dropdown extends React.Component {
    * @method handleMouseOverListItem
    * @param {Object} ev event
    */
-  handleMouseOverListItem = (ev) => {
-    this.setState({ highlighted: ev.currentTarget.getAttribute('value') });
+  handleMouseOverListItem = (value) => {
+    this.setState({ highlighted: value });
   }
 
   /*
@@ -240,25 +242,21 @@ class Dropdown extends React.Component {
   /**
    * Sets the selected value based on selected id.
    *
-   * @method nameByID
+   * @method getVisibleValue
    * @param {String} value
    */
-  nameByID = () => {
-    if (this.props.options) {
-      this.visibleValue = '';
-      // if no value selected, no match possible
-      if (!this.props.value) { return this.visibleValue; }
-
-      // Match selected id to corresponding list option
-      let option = this.props.options.find((item) => {
-        return item.get('id') == this.props.value;
+  getVisibleValue = () => {
+    if (this.props.visibleValue) {
+      return this.props.visibleValue;
+    } else if (this.props.value) {
+      let child = this.props.children.find((child) => {
+        return String(this.props.value) === String(child.props.value);
       });
-      // If match is found, set visibleValue to option's name;
-      if (option) { this.visibleValue = option.get('name'); }
-    }
 
-    // If match is found, set value to option's name;
-    return this.visibleValue;
+      if (child && child.props && child.props.children) {
+        return child.props.children;
+      }
+    }
   }
 
   /**
@@ -385,27 +383,18 @@ class Dropdown extends React.Component {
   }
 
   /**
-   * Returns the list options in the correct format
-   *
-   * @method options
-   */
-  get options() {
-    return this.props.options.toJS();
-  }
-
-  /**
    * A getter that combines props passed down from the input decorator with
    * dropdown specific props.
    *
    * @method inputProps
    */
   get inputProps() {
-    let { ...props } = this.props;
+    let { children, ...props } = this.props;
 
     delete props.autoFocus;
 
     props.className = this.inputClasses;
-    props.value = this.visibleValue || this.nameByID();
+    props.value = this.getVisibleValue();
     props.name = null;
     props.onBlur = this.handleBlur;
     props.onKeyDown = this.handleKeyDown;
@@ -498,41 +487,12 @@ class Dropdown extends React.Component {
     );
   }
 
-  /**
-   * Function that returns search results. Builds each list item with relevant handlers and classes.
-   *
-   * @method results
-   */
   results(options) {
-    let className = 'carbon-dropdown__list-item',
-        highlighted = this.highlighted(options);
+    return options;
+  }
 
-    let results = options.map((option) => {
-      let klass = className;
-
-      // add highlighted class
-      if (highlighted == option.id) {
-        klass += ` ${className}--highlighted`;
-      }
-
-      // add selected class
-      if (this.props.value == option.id) {
-        klass += ` ${className}--selected`;
-      }
-
-      return (
-        <li
-          key={ option.name + option.id }
-          value={ option.id }
-          onClick={ this.handleSelect }
-          onMouseOver={ this.handleMouseOverListItem }
-          className={ klass }>
-            { option.name }
-        </li>
-      );
-    });
-
-    return results;
+  get options() {
+    return this.props.children;
   }
 
   /**
@@ -577,4 +537,7 @@ class Dropdown extends React.Component {
 }
 ))));
 
-export default Dropdown;
+export {
+  Dropdown,
+  Option
+};

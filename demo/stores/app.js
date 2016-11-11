@@ -291,6 +291,10 @@ class AppStore extends Store {
     if (action.component === 'dropdown_filter_ajax') {
       this.data = this.data.setIn(arr, action.visibleValue);
     }
+
+    if (action.component === 'dropdown') {
+      this.data = this.data.setIn(['dropdown', 'visibleValue'], action.visibleValue);
+    }
   }
 
   /**

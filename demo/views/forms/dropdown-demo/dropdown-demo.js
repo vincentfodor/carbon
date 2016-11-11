@@ -6,7 +6,7 @@ import AppActions from './../../../actions/app';
 import Example from './../../../components/example';
 import FormInputHelper from './../../../helpers/form-input-helper';
 
-import Dropdown from 'components/dropdown';
+import { Dropdown, Option } from 'components/dropdown';
 
 class DropdownDemo extends React.Component {
 
@@ -36,7 +36,15 @@ class DropdownDemo extends React.Component {
     ]);
 
     return (
-      <Dropdown options={ opts } { ...FormInputHelper.demoProps(this, this.action) } />
+      <div>
+        <Dropdown value={ this.value('value') } onChange={ this.action.bind(this, 'value') } visibleValue={ this.value('visibleValue') }>
+          {
+            opts.map((opt, index) => {
+              return <Option key={ index } value={ opt.get('id') }>{ opt.get('name') }</Option>;
+            })
+          }
+        </Dropdown>
+      </div>
     );
   }
 

@@ -7,6 +7,7 @@ import Example from './../../../components/example';
 import FormInputHelper from './../../../helpers/form-input-helper';
 
 import DropdownFilter from 'components/dropdown-filter';
+import Option from 'components/dropdown/option';
 
 class DropdownFilterDemo extends React.Component {
 
@@ -44,7 +45,13 @@ class DropdownFilterDemo extends React.Component {
     ]);
 
     return (
-      <DropdownFilter options={ opts } { ...FormInputHelper.demoProps(this, this.action) } />
+      <DropdownFilter options={ opts } { ...FormInputHelper.demoProps(this, this.action) }>
+        {
+          opts.map((opt) => {
+            return <Option value={ opt.get('id') }>{ opt.get('name') }</Option>;
+          })
+        }
+      </DropdownFilter>
     );
   }
 

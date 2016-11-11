@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from './../dropdown';
+import { Dropdown } from './../dropdown';
 import I18n from 'i18n-js';
 import classNames from 'classnames';
 import escapeStringRegexp from 'escape-string-regexp';
@@ -192,20 +192,26 @@ class DropdownFilter extends Dropdown {
    * @param {Object} options Immutable map of list options
    */
   prepareList = (options) => {
+    let filteredOptions = options;
+
     if ((this.props.suggest || !this.openingList) && typeof this.state.filter === 'string') {
       let filter = this.state.filter;
       let regex = new RegExp(escapeStringRegexp(filter), 'i');
+      filteredOptions = [];
 
       // if user has entered a search filter
-      options = options.filter((option) => {
-        if (option.name.search(regex) > -1) {
-          option.name = this.highlightMatches(option.name, filter);
-          return option;
+      options.filter((option) => {
+        if (option.props.children.search(regex) > -1) {
+          filteredOptions.push(React.cloneElement(
+            option,
+            {},
+            this.highlightMatches(option.props.children, filter)
+          ));
         }
       });
     }
 
-    return options;
+    return filteredOptions;
   }
 
   /**
@@ -218,14 +224,14 @@ class DropdownFilter extends Dropdown {
 
     if (!items.length) {
       items = (
-        <li className={ 'carbon-dropdown__list-item carbon-dropdown__list-item--no-results' }>
+        <Option className={ 'carbon-dropdown__list-item carbon-dropdown__list-item--no-results' }>
           {
             I18n.t("dropdownlist.no_results", {
               defaultValue: "No results match \"%{term}\"",
               term: this.state.filter
             })
           }
-        </li>
+        </Option>
       );
     }
 
@@ -285,7 +291,7 @@ class DropdownFilter extends Dropdown {
    * @method options
    */
   get options() {
-    return this.prepareList(this.props.options.toJS());
+    return this.prepareList(this.props.children);
   }
 
   /**
