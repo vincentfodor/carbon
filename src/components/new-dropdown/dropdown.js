@@ -7,8 +7,10 @@ import classNames from 'classnames';
 import Events from './../../utils/helpers/events';
 import Option from './option';
 import List from './list';
+import escapeStringRegexp from 'escape-string-regexp';
 import { validProps } from '../../utils/ether';
 
+import I18n from 'i18n-js';
 const Dropdown = Input(InputIcon(InputLabel(InputValidation(
 class Dropdown extends React.Component {
 
@@ -22,12 +24,17 @@ class Dropdown extends React.Component {
     open: false
   }
 
+  static defaultProps = {
+    filter: false
+  }
+
   static propTypes = {
     value: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.number
     ]),
     visibleValue: React.PropTypes.string,
+    onCreate: React.PropTypes.func
   }
 
   static childContextTypes = {
@@ -53,6 +60,10 @@ class Dropdown extends React.Component {
     }
   }
 
+  canFilter = () => {
+    return this.props.filter;
+  }
+
   focus = () => {
     this._input.focus();
   }
@@ -67,7 +78,7 @@ class Dropdown extends React.Component {
 
   selectValue(val, visibleVal) {
     this.unblockBlur();
-    this.setState({ open: false });
+    this.setState({ open: false, filter: null });
     this._handleContentChange();
     this.emitOnChangeCallback(val, visibleVal);
   }
@@ -90,9 +101,28 @@ class Dropdown extends React.Component {
     }
   }
 
+  handleVisibleChange = (ev) => {
+    let state = {
+      filter: ev.target.value,
+      highlighted: null
+    };
+
+    if (this.props.suggest && ev.target.value.length <= 0) {
+      state.open = false;
+    } else {
+      state.open = true;
+    }
+
+    this.setState(state);
+
+    if (this.props.onFilter) {
+      this.props.onFilter(ev.target.value);
+    }
+  }
+
   handleBlur = () => {
     if (!this._blockBlur) {
-      this.setState({ open: false });
+      this.setState({ open: false, filter: null });
     }
   }
 
@@ -101,6 +131,10 @@ class Dropdown extends React.Component {
       this.blockFocus = false;
     } else {
       this.setState({ open: true });
+    }
+
+    if (this.canFilter()) {
+      this._input.setSelectionRange(0, this._input.value.length);
     }
   }
 
@@ -139,10 +173,15 @@ class Dropdown extends React.Component {
 
     props.className = this.inputClasses;
     props.value = this.props.visibleValue || this.state.visibleValue || "";
+    if (typeof this.state.filter === 'string') {
+      // if filter has a value, use that instead
+      props.value = this.state.filter;
+    }
     props.name = null;
     props.onBlur = this.handleBlur;
     props.onKeyDown = this.handleKeyDown;
-    props.readOnly = true;
+    props.readOnly = this.props.readOnly || !this.canFilter();
+    props.onChange = this.handleVisibleChange;
 
     if (!this.props.readOnly && !this.props.disabled) {
       props.onFocus = this.handleFocus;
@@ -156,7 +195,6 @@ class Dropdown extends React.Component {
       type: 'hidden',
       readOnly: true,
       name: this.props.name,
-      // Using this to prevent `null` warnings from React
       value: this.props.value || this.state.value || ""
     };
 
@@ -174,6 +212,11 @@ class Dropdown extends React.Component {
     return 'carbon-dropdown__input';
   }
 
+  handleCreate = (ev) => {
+    this.setState({ open: false, filter: null });
+    this.props.onCreate(ev, this);
+  }
+
   get additionalInputContent() {
     let content = [];
 
@@ -186,12 +229,86 @@ class Dropdown extends React.Component {
         ref={ (c) => this.list = c }
         key="listBlock"
         open={ this.state.open }
+        onCreate={ this.handleCreate }
+        create={ this.props.onCreate }
+        filterText={ this.state.filter }
       >
-        { this.props.children }
+        { this.results() }
       </List>
     );
 
     return content;
+  }
+
+  results = () => {
+    let children = this.props.children;
+
+    if (this.state.filter && !this.props.onFilter) {
+      let regex = new RegExp(escapeStringRegexp(this.state.filter), 'i');
+      children = [];
+
+      this.props.children.forEach((child) => {
+        let text = "";
+
+        if (typeof child.props.children === "string") {
+          if (child.props.children.search(regex) > -1) {
+            children.push(React.cloneElement(child, child.props, this.highlightMatches(child.props.children, this.state.filter)));
+          }
+        } else if (child.props.filter) {
+          if (child.props.filter.search(regex) > -1) {
+            children.push(child);
+          }
+        } else {
+          throw Error("To automatically filter your Options need to either only render a string or pass a prop of 'filter'.");
+        }
+      });
+
+      if (!children.length) {
+        return (
+          <li className={ 'carbon-dropdown__list-item carbon-dropdown__list-item--no-results' }>
+            {
+              I18n.t("dropdownlist.no_results", {
+                defaultValue: "No results match \"%{term}\"",
+                term: this.state.filter
+              })
+            }
+          </li>
+        );
+      }
+    }
+
+    return children;
+  }
+
+  highlightMatches = (optionText, value) => {
+    if (!value.length) { return optionText; }
+
+    let beginning, end, middle, newValue, parsedOptionText, valIndex;
+
+    parsedOptionText = optionText.toLowerCase();
+    valIndex = parsedOptionText.indexOf(value);
+
+    if (valIndex === -1) {
+      return optionText;
+    }
+
+    beginning = optionText.substr(0, valIndex);
+    middle = optionText.substr(valIndex, value.length);
+    end = optionText.substr(valIndex + value.length, optionText.length);
+
+    // find end of string recursively
+    if (end.indexOf(value) !== -1) {
+      end = this.highlightMatches(end, value);
+    }
+
+    // build JSX object
+    newValue = [
+      <span   key="beginning">{ beginning }</span>,
+      <strong key="middle"><u>{ middle }</u></strong>,
+      <span   key="end">{ end }</span>
+    ];
+
+    return newValue;
   }
 
   render() {

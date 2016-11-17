@@ -111,17 +111,6 @@ class DropdownFilter extends Dropdown {
     }
   }
 
-  /**
-   * Selects the value for the component
-   *
-   * @method selectValue
-   * @param {String} val
-   */
-  selectValue(val, visibleVal) {
-    super.selectValue(val, visibleVal);
-    this.setState({ filter: null });
-  }
-
   /*
    * Handles changes to the visible input field. Updates filter and displayed value.
    *
@@ -183,8 +172,8 @@ class DropdownFilter extends Dropdown {
    * @method handleCreate
    */
   handleCreate = (ev) => {
-    this.setState({ open: false });
-    this.props.create(ev, this);
+    this.setState({ open: false, filter: null });
+    this.props.onCreate(ev, this);
   }
 
   /**
@@ -336,44 +325,6 @@ class DropdownFilter extends Dropdown {
     props.value = value;
 
     return props;
-  }
-
-  /**
-   * Find and highlights search terms in text
-   *
-   * @method highlightMatches
-   * @param {String} optionText - the text to search
-   * @param {String} value - the search term
-   */
-  highlightMatches = (optionText, value) => {
-    if (!value.length) { return optionText; }
-
-    let beginning, end, middle, newValue, parsedOptionText, valIndex;
-
-    parsedOptionText = optionText.toLowerCase();
-    valIndex = parsedOptionText.indexOf(value);
-
-    if (valIndex === -1) {
-      return optionText;
-    }
-
-    beginning = optionText.substr(0, valIndex);
-    middle = optionText.substr(valIndex, value.length);
-    end = optionText.substr(valIndex + value.length, optionText.length);
-
-    // find end of string recursively
-    if (end.indexOf(value) !== -1) {
-      end = this.highlightMatches(end, value);
-    }
-
-    // build JSX object
-    newValue = [
-      <span   key="beginning">{ beginning }</span>,
-      <strong key="middle"><u>{ middle }</u></strong>,
-      <span   key="end">{ end }</span>
-    ];
-
-    return newValue;
   }
 
 }

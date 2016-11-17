@@ -89,6 +89,22 @@ class List extends React.Component {
     return this.list.getElementsByClassName('carbon-dropdown__list-item--highlighted')[0];
   }
 
+  createContent = () => {
+    if (this.props.create) {
+      let text = "Create ";
+
+      if (this.props.filterText) {
+        text += '"' + this.props.filterText + '"';
+      } else {
+        text += "New";
+      }
+
+      return (
+        <a key="dropdown-action" className="carbon-dropdown__action" onClick={ this.props.onCreate }>{ text }</a>
+      );
+    }
+  }
+
   render() {
     if (!this.props.open) { return null; }
 
@@ -101,6 +117,8 @@ class List extends React.Component {
         <ul className="carbon-dropdown__list" ref={ (c) => this.list = c }>
           { this.props.children }
         </ul>
+
+        { this.createContent() }
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'utils/flux';
 import Immutable from 'immutable';
 import AppStore from './../../../stores/app';
+import Checkbox from 'components/checkbox';
 import AppActions from './../../../actions/app';
 import Example from './../../../components/example';
 import FormInputHelper from './../../../helpers/form-input-helper';
@@ -50,7 +51,7 @@ class DropdownDemo extends React.Component {
 
     return (
       <div>
-        <Dropdown>
+        <Dropdown filter={ this.value('filter') } onCreate={ this.value('create') ? () => {} : null }>
           {
             opts.map((opt, index) => {
               return <Option key={ index } value={ opt.get('id') }>{ opt.get('name') }</Option>;
@@ -87,7 +88,13 @@ class DropdownDemo extends React.Component {
    * @method controls
    */
   get controls() {
-    return FormInputHelper.controls(this, this.action);
+    return (
+      <div>
+        <Checkbox value={ this.value('filter') || false } onChange={ this.action.bind(this, 'filter') } />
+        <Checkbox value={ this.value('create') || false } onChange={ this.action.bind(this, 'create') } />
+      </div>
+    );
+    // return FormInputHelper.controls(this, this.action);
   }
 
   /**
