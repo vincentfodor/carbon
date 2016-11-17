@@ -2,7 +2,8 @@ import React from 'react';
 
 class Option extends React.Component {
   static contextTypes = {
-    dropdown: React.PropTypes.object
+    dropdown: React.PropTypes.object,
+    list: React.PropTypes.object
   }
 
   get classes() {
@@ -22,13 +23,17 @@ class Option extends React.Component {
     return klass;
   }
 
+  handleSelect = (ev) => {
+    this.context.dropdown.selectValue(this.props.value, ev.currentTarget.textContent);
+  }
+
   render() {
     return (
       <li
         className={ this.classes }
         value={ this.props.value }
-        onClick={ this.context.dropdown.handleSelect.bind(this, this.props.value) }
-        onMouseOver={ this.context.dropdown.handleMouseOverListItem.bind(this, this.props.value) }
+        onClick={ this.handleSelect }
+        onMouseOver={ this.context.list.handleMouseOverListItem.bind(this, this.props.value) }
       >
         { this.props.children }
       </li>

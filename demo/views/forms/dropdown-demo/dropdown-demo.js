@@ -6,7 +6,7 @@ import AppActions from './../../../actions/app';
 import Example from './../../../components/example';
 import FormInputHelper from './../../../helpers/form-input-helper';
 
-import { Dropdown, Option } from 'components/dropdown';
+import { Dropdown, Option } from 'components/new-dropdown';
 
 class DropdownDemo extends React.Component {
 
@@ -32,12 +32,25 @@ class DropdownDemo extends React.Component {
       { id: 1, name: "Option One" },
       { id: 2, name: "Option Two" },
       { id: 3, name: "Option Three" },
-      { id: 4, name: "Option Four" }
+      { id: 4, name: "Option Three" },
+      { id: 5, name: "Option Three" },
+      { id: 6, name: "Option Three" },
+      { id: 7, name: "Option Three" },
+      { id: 8, name: "Option Three" },
+      { id: 9, name: "Option Three" },
+      { id: 10, name: "Option Three" },
+      { id: 11, name: "Option Three" },
+      { id: 12, name: "Option Three" },
+      { id: 13, name: "Option Three" },
+      { id: 14, name: "Option Three" },
+      { id: 15, name: "Option Three" },
+      { id: 16, name: "Option Three" },
+      { id: 17, name: "Option Four" }
     ]);
 
     return (
       <div>
-        <Dropdown value={ this.value('value') } onChange={ this.action.bind(this, 'value') } visibleValue={ this.value('visibleValue') }>
+        <Dropdown>
           {
             opts.map((opt, index) => {
               return <Option key={ index } value={ opt.get('id') }>{ opt.get('name') }</Option>;

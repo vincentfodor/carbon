@@ -5,7 +5,6 @@ import InputValidation from './../../utils/decorators/input-validation';
 import InputIcon from './../../utils/decorators/input-icon';
 import classNames from 'classnames';
 import Events from './../../utils/helpers/events';
-import Option from './option';
 import { validProps } from '../../utils/ether';
 
 /**
@@ -47,6 +46,16 @@ class Dropdown extends React.Component {
      */
     this.blockBlur = false;
 
+    /**
+     * Variable to cache current value.
+     * Setting it here rather than state prevents complete rerender when value changes.
+     *
+     * @property visibleValue
+     * @type {String}
+     * @default ''
+     */
+    this.visibleValue = '';
+
     // bind scope to functions - allowing them to be overridden and
     // recalled with the use of super
     this.selectValue = this.selectValue.bind(this);
@@ -73,8 +82,7 @@ class Dropdown extends React.Component {
      * @property options
      * @type {object}
      */
-
-    visibleValue: React.PropTypes.string,
+    options: React.PropTypes.object.isRequired,
 
     /**
      * Determines if the visibleValue will be cached or not.
@@ -108,28 +116,6 @@ class Dropdown extends React.Component {
      */
     highlighted: null
   };
-
-  static childContextTypes = {
-    /**
-     * Defines a context object for child components of the form component.
-     * https://facebook.github.io/react/docs/context.html
-     *
-     * @property form
-     * @type {Object}
-     */
-    dropdown: React.PropTypes.object
-  }
-
-  getChildContext = () => {
-    return {
-      dropdown: {
-        handleSelect: this.handleSelect,
-        handleMouseOverListItem: this.handleMouseOverListItem,
-        highlighted: this.state.highlighted,
-        selected: this.props.value
-      }
-    };
-  }
 
   /**
    * Manually focus if autoFocus is applied - allows us to prevent the list from opening.
@@ -193,8 +179,8 @@ class Dropdown extends React.Component {
    * @method handleSelect
    * @param {Object} ev event
    */
-  handleSelect = (value, ev) => {
-    this.selectValue(value, ev.currentTarget.textContent);
+  handleSelect = (ev) => {
+    this.selectValue(ev.currentTarget.getAttribute('value'), ev.currentTarget.textContent);
   }
 
   /**
@@ -203,8 +189,8 @@ class Dropdown extends React.Component {
    * @method handleMouseOverListItem
    * @param {Object} ev event
    */
-  handleMouseOverListItem = (value) => {
-    this.setState({ highlighted: value });
+  handleMouseOverListItem = (ev) => {
+    this.setState({ highlighted: ev.currentTarget.getAttribute('value') });
   }
 
   /*
@@ -267,21 +253,25 @@ class Dropdown extends React.Component {
   /**
    * Sets the selected value based on selected id.
    *
-   * @method getVisibleValue
+   * @method nameByID
    * @param {String} value
    */
-  getVisibleValue = () => {
-    if (this.props.visibleValue) {
-      return this.props.visibleValue;
-    } else if (this.props.value) {
-      let child = this.props.children.find((child) => {
-        return String(this.props.value) === String(child.props.value);
-      });
+  nameByID = () => {
+    if (this.props.options) {
+      this.visibleValue = '';
+      // if no value selected, no match possible
+      if (!this.props.value) { return this.visibleValue; }
 
-      if (child && child.props && child.props.children) {
-        return child.props.children;
-      }
+      // Match selected id to corresponding list option
+      let option = this.props.options.find((item) => {
+        return item.get('id') == this.props.value;
+      });
+      // If match is found, set visibleValue to option's name;
+      if (option) { this.visibleValue = option.get('name'); }
     }
+
+    // If match is found, set value to option's name;
+    return this.visibleValue;
   }
 
   /**
@@ -293,7 +283,7 @@ class Dropdown extends React.Component {
   handleKeyDown = (ev) => {
     ev.stopPropagation();
 
-    if (!this.refs.list) {
+    if (!this.state.open) {
       // if up/down/space then open list
       if (Events.isUpKey(ev) || Events.isDownKey(ev) || Events.isSpaceKey(ev)) {
         ev.preventDefault();
@@ -408,18 +398,27 @@ class Dropdown extends React.Component {
   }
 
   /**
+   * Returns the list options in the correct format
+   *
+   * @method options
+   */
+  get options() {
+    return this.props.options.toJS();
+  }
+
+  /**
    * A getter that combines props passed down from the input decorator with
    * dropdown specific props.
    *
    * @method inputProps
    */
   get inputProps() {
-    let { children, ...props } = validProps(this);
+    let { ...props } = validProps(this);
 
     delete props.autoFocus;
 
     props.className = this.inputClasses;
-    props.value = this.getVisibleValue();
+    props.value = this.visibleValue || this.nameByID();
     props.name = null;
     props.onBlur = this.handleBlur;
     props.onKeyDown = this.handleKeyDown;
@@ -513,12 +512,41 @@ class Dropdown extends React.Component {
     );
   }
 
+  /**
+   * Function that returns search results. Builds each list item with relevant handlers and classes.
+   *
+   * @method results
+   */
   results(options) {
-    return options;
-  }
+    let className = 'carbon-dropdown__list-item',
+        highlighted = this.highlighted(options);
 
-  get options() {
-    return this.props.children;
+    let results = options.map((option) => {
+      let klass = className;
+
+      // add highlighted class
+      if (highlighted == option.id) {
+        klass += ` ${className}--highlighted`;
+      }
+
+      // add selected class
+      if (this.props.value == option.id) {
+        klass += ` ${className}--selected`;
+      }
+
+      return (
+        <li
+          key={ option.name + option.id }
+          value={ option.id }
+          onClick={ this.handleSelect }
+          onMouseOver={ this.handleMouseOverListItem }
+          className={ klass }>
+            { option.name }
+        </li>
+      );
+    });
+
+    return results;
   }
 
   /**
@@ -564,7 +592,4 @@ class Dropdown extends React.Component {
 }
 ))));
 
-export {
-  Dropdown,
-  Option
-};
+export default Dropdown;
