@@ -11,6 +11,7 @@ import Row from 'components/row';
 import Button from 'components/button';
 import Textbox from 'components/textbox';
 import Checkbox from 'components/checkbox';
+import MountInApp from 'components/mount-in-app';
 
 class DialogDemo extends React.Component {
 
@@ -37,21 +38,23 @@ class DialogDemo extends React.Component {
         <Button onClick={ this.action.bind(this, 'open', { target: { value: true } } ) } >
           Click me to Open Dialog
         </Button>
-        <Dialog
-          open={ this.value('open') }
-          onCancel={ this.action.bind(this, 'open', { target: { value: false } } ) }
-          title={ this.value('title') }
-          enableBackgroundUI={ this.value('enableBackgroundUI') }
-          showCloseIcon={ this.value('showCloseIcon') }
-          closeOnBackgroundClick={ this.value('closeOnBackgroundClick') }
-          closeOnESCKey={ this.value('closeOnESCKey') }
-          size={ this.value('size') }
-        >
-          <Row>
-            <Textbox />
-            <Textbox />
-          </Row>
-        </Dialog>
+        <MountInApp targetId="modal-container">
+          <Dialog
+            open={ this.value('open') }
+            onCancel={ this.action.bind(this, 'open', { target: { value: false } } ) }
+            title={ this.value('title') }
+            enableBackgroundUI={ this.value('enableBackgroundUI') }
+            showCloseIcon={ this.value('showCloseIcon') }
+            closeOnBackgroundClick={ this.value('closeOnBackgroundClick') }
+            closeOnESCKey={ this.value('closeOnESCKey') }
+            size={ this.value('size') }
+          >
+            <Row>
+              <Textbox />
+              <Textbox />
+            </Row>
+          </Dialog>
+        </MountInApp>
       </div>
     );
   }
