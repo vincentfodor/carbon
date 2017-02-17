@@ -77,7 +77,7 @@ const buildFields = (props) => {
 const fieldComponent = (name, prop, value, field, options, requirement) => {
   let commonfieldProps = {
         key: name + prop,
-        label: titleize(kebabCase(prop)).replace(/-/g, " "),
+        label: titleize(kebabCase(prop)).replace(/-/g, " ").replace('Ui', 'UI'),
         onChange: ComponentActions.updateDefinition.bind(this, name, prop),
         value: value
       };

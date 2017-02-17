@@ -11,6 +11,7 @@ let definition = new Definition('icon', Icon, {
     tooltipAlign: "tooltipMessage",
   },
   propValues: {
+    bgTheme: 'help',
     type: "tick"
   },
   propOptions: {
