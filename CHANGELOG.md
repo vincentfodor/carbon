@@ -190,6 +190,7 @@ e.g.
 
 >>>>>>> Update release notes.
 * `Decimal`: fix issue where `visibleValue` was not updated after a change to `precision`.
+* `TableHeader`: fix overflow issue so that tooltip / help components aren't cut off.
 
 # 0.34.4
 
