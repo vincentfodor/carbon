@@ -8,7 +8,7 @@ import { validProps } from '../../utils/ether';
 import { assign } from 'lodash';
 import { tagComponent } from '../../utils/helpers/tags';
 
-import FormSummary from './form-summary';
+import FormButtons from './form-buttons';
 
 /**
  * A Form widget.
@@ -501,6 +501,7 @@ class Form extends React.Component {
     );
   }
 
+<<<<<<< 1052bd22f06a8962afc25b78404c0953c6651494
   /**
    * Gets the cancel button for the form
    *
@@ -518,6 +519,8 @@ class Form extends React.Component {
     </div>);
   }
 
+=======
+>>>>>>> WIP abstracts out FormSave and FormButtons
   get additionalActions() {
     if (!this.props.additionalActions) { return null; }
 
@@ -529,6 +532,7 @@ class Form extends React.Component {
   }
 
   /**
+<<<<<<< 1052bd22f06a8962afc25b78404c0953c6651494
    * Gets the save button for the form
    * @method saveButton
    * @return {Object} JSX save button
@@ -552,22 +556,14 @@ class Form extends React.Component {
   }
 
   /**
+=======
+>>>>>>> WIP abstracts out FormSave and FormButtons
    * Renders the component.
    *
    * @method render
    * @return {Object} JSX form
    */
   render() {
-    let cancelButton, saveButton;
-
-    if (this.props.cancel) {
-      cancelButton = this.cancelButton;
-    }
-
-    if (this.props.save) {
-      saveButton = this.saveButton;
-    }
-
     return (
       <form onSubmit={ this.handleOnSubmit } { ...this.htmlProps() } ref="form" { ...tagComponent('form', this.props) }>
         { generateCSRFToken(this._document) }
@@ -575,8 +571,21 @@ class Form extends React.Component {
         { this.props.children }
 
         <div className={ this.buttonClasses }>
-          { saveButton }
-          { cancelButton }
+          <FormButtons
+            cancel={ this.props.cancel }
+            cancelButtonProps={ this.props.cancelButtonProps }
+            cancelClick={ this.cancelForm }
+            cancelText={ this.props.cancelText }
+
+            errors={ this.state.errorCount }
+
+            save={ this.props.save }
+            saveButtonProps={ this.props.saveButtonProps }
+            saveText={ this.props.saveText }
+            saving={ this.props.saving }
+
+            warnings={ this.state.warningCount }
+          />
           { this.additionalActions }
         </div>
       </form>

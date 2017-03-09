@@ -6,7 +6,7 @@ import { tagComponent } from '../../../utils/helpers/tags';
 import Icon from './../../icon';
 
 const FormSummary = props =>
-  <div className='carbon-form-summary' { ...tagComponent('form-summary', props) }>
+  <div className={ classes(props) } { ...tagComponent('form-summary', props) }>
     { summary(props, 'error') }
     { summary(props, 'warning') }
   </div>
@@ -21,6 +21,10 @@ FormSummary.propTypes = {
     PropTypes.string,
     PropTypes.number
   ])
+};
+
+const classes = (props) => {
+  return `carbon-form-summary ${props.className}`;
 };
 
 /**

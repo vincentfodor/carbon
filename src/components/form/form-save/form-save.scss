@@ -1,0 +1,15 @@
+@import '../../../style-config/colors';
+
+.carbon-form-save {
+  display: inline-flex;
+  padding: 5px;
+
+  &--invalid {
+    background-color: $grey-dark-blue-20;
+    border-radius: 4px;
+  }
+
+  &__summary {
+    margin: 0 10px;
+  }
+}

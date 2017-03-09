@@ -1,0 +1,4 @@
+{
+  "main": "./form-save.js",
+  "style": "./form-save.scss"
+}
