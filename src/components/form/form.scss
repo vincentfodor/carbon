@@ -1,7 +1,15 @@
 @import "./../../style-config/colors";
 
 .carbon-form__save--invalid {
+<<<<<<< d35c975b09ff2876df3372d5417b4b16b2ad3276
   background-color: $grey-dark-blue-5;
+=======
+  background-color: #DEE0E8;
+
+  .carbon-button {
+    margin-left: 5px;
+  }
+>>>>>>> abstracts out FormSummary
 }
 
 .carbon-form__summary {
