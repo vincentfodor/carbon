@@ -113,6 +113,9 @@ const translation = (props, key) => {
   let defaultTranslation = defaultTranslations(props.errors, props.warnings)[key],
       location = `errors.messages.form_summary.${key}`;
 
+  let defaultTranslation = defaultTranslations(props.errors,props.warnings)[key],
+      location = `errors.messages.form_summary.${key}`;
+
   return I18n.t(location, defaultTranslation);
 };
 
