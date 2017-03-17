@@ -38,8 +38,9 @@ const summary = (props, key) => {
         <span
           className='carbon-form-summary__text'
           data-element={ pluralize(key) }
-          dangerouslySetInnerHTML={{ __html: translation(props, key) }}
-        />
+        >
+          { translation(props, key) }
+        </span>
       </span>
     );
   }

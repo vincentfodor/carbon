@@ -23,7 +23,7 @@ describe('<FormSummary />', () => {
     });
 
     it("the correct translation wrapped in the text class", () => {
-      let text = wrapper.find(`${block}__text`).render().text();
+      let text = wrapper.find(`${block}__text`).text();
       expect(text).toContain('There is 1 error');
     });
   });
@@ -41,7 +41,7 @@ describe('<FormSummary />', () => {
     });
 
     it("the correct translation wrapped in a class that brings accessible contrast", () => {
-      let text = wrapper.find(`${block}__text`).render().text();
+      let text = wrapper.find(`${block}__text`).text();
       expect(text).toContain('There is 1 warning');
     });
   });
