@@ -1,0 +1,16 @@
+{
+  "files": [
+    "src/main.ts"
+  ],
+  "compilerOptions": {
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "target": "es2015",
+    "jsx": "react",
+    "allowJs": true,
+    "pretty": true
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
