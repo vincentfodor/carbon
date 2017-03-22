@@ -46,6 +46,7 @@ export function connect(ComposedView, stores) {
     // if there is a single store, just add it
     _addStore(stores);
   }
+  debugger
 
   /**
    * Extends the specified view component with additional functionality with working
