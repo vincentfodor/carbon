@@ -211,6 +211,8 @@ let Input = (ComposedComponent) => class Component extends ComposedComponent {
     // Adds data tag for automation
     inputProps["data-element"] = "input";
 
+    inputProps.value = this.props.value || '';
+
     // Remove data-role as this should be applied on the top level element
     delete inputProps["data-role"];
 

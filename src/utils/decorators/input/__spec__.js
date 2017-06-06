@@ -305,6 +305,24 @@ describe('Input', () => {
         expect(instance.inputProps.onPaste).toEqual(instance.props.onPaste);
       });
     });
+
+    describe('when setting value', () => {
+      it('sets the value to the given value when defined', () => {
+        let testValue = 'foo';
+        instance = TestUtils.renderIntoDocument(React.createElement(ExtendedClassOne, {
+          value: testValue
+        }));
+
+        expect(instance.inputProps.value).toEqual(testValue);
+      });
+
+      it('sets the value to the empty string when the given value is undefined', () => {
+        instance = TestUtils.renderIntoDocument(
+          React.createElement(ExtendedClassOne, {}));
+
+        expect(instance.inputProps.value).toEqual('');
+      });
+    })
   });
 
   describe('fieldProps', () => {
