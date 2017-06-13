@@ -398,14 +398,16 @@ class Dropdown extends React.Component {
    * @return {Void}
    */
   updateScroll(list, nextItem) {
-    let firstTop = list.firstChild.offsetTop,
-        itemHeight = nextItem.offsetHeight,
-        listHeight = list.offsetHeight;
-
-    if (nextItem.offsetTop + itemHeight > listHeight) {
-      list.scrollTop = nextItem.offsetTop - firstTop - (listHeight - itemHeight);
-    } else if (nextItem.offsetTop === 1) {
-      list.scrollTop = nextItem.offsetTop - firstTop;
+    if (nextItem.scrollIntoViewIfNeeded) {
+      nextItem.scrollIntoViewIfNeeded();
+    } else if (nextItem.scrollIntoView) {
+      /*
+      nextItem.scrollIntoView({
+        block: 'end',
+        behavior: 'smooth'
+      });
+      */
+      nextItem.scrollIntoView(false);
     }
   }
 
