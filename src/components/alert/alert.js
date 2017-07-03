@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { assign } from 'lodash';
 import Dialog from '../dialog';
+import { time } from '../../utils/decorators/profile';
 
 /**
  * A Alert widget.
@@ -70,6 +71,7 @@ class Alert extends Dialog {
    * @override
    * @return {Void}
    */
+  @time
   onDialogBlur(ev) {
     if (!this.props.showCloseIcon) {
       ev.preventDefault();
