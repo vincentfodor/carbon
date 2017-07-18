@@ -111,27 +111,28 @@ class RadioButton extends React.Component {
    * @return {Object} JSX svg
    */
   get radiobuttonSprite() {
-    let svg = '';
-
-    svg += '<svg width="15" height="15" viewBox="0 0 15 15">';
-    svg += '  <g stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">';
-    svg += '    <g transform="translate(-69.000000, -293.000000)">';
-    svg += '      <g transform="translate(69.000000, 268.000000)">';
-    svg += '        <g transform="translate(0.000000, 25.000000)">';
-    svg += '          <circle class="radio-button-fill" fill="#FFFFFF" cx="7.5" cy="7.5" r="7.5"></circle>';
-    svg += '          <path class="radio-button-outline" d="M7.5,15 C11.6421356,15 15,11.6421356 15,';
-    svg += '            7.5 C15,3.35786438 11.6421356,0 7.5,0 C3.35786438,0 0,3.35786438 0,7.5 C0,';
-    svg += '            11.6421356 3.35786438,15 7.5,15 Z M7.5,14 C11.0898509,14 14,11.0898509 14,';
-    svg += '            7.5 C14,3.91014913 11.0898509,1 7.5,1 C3.91014913,1 1,3.91014913 1,7.5 C1,';
-    svg += '            11.0898509 3.91014913,14 7.5,14 Z" fill="#AFAFAF"></path>';
-    svg += '          <circle fill="#FFFFFF" cx="7.5" cy="7.5" r="3.5" class="radio-button-check"></circle>';
-    svg += '        </g>';
-    svg += '      </g>';
-    svg += '    </g>';
-    svg += '  </g>';
-    svg += '</svg>';
-
-    return svg;
+    return (
+      <svg width='15' height='15' viewBox='0 0 15 15'>
+        <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
+          <g transform='translate(-69.000000, -293.000000)'>
+            <g transform='translate(69.000000, 268.000000)'>
+              <g transform='translate(0.000000, 25.000000)'>
+                <circle className='radio-button-fill' fill='#FFFFFF' cx='7.5' cy='7.5' r='7.5' />
+                <path
+                  className='radio-button-outline'
+                  d='M7.5,15 C11.6421356,15 15,11.6421356 15,7.5 C15,3.35786438 11.6421356,
+                    0 7.5,0 C3.35786438,0 0,3.35786438 0,7.5 C0,11.6421356 3.35786438,15 7.5,
+                    15 Z M7.5,14 C11.0898509,14 14,11.0898509 14,7.5 C14,3.91014913 11.0898509,
+                    1 7.5,1 C3.91014913,1 1,3.91014913 1,7.5 C1,11.0898509 3.91014913,14 7.5,14 Z'
+                  fill='#AFAFAF'
+                />
+                <circle fill='#FFFFFF' cx='7.5' cy='7.5' r='3.5' className='radio-button-check' />
+              </g>
+            </g>
+          </g>
+        </g>
+      </svg>
+    );
   }
 
   /**
@@ -142,10 +143,9 @@ class RadioButton extends React.Component {
    */
   get additionalInputContent() {
     return (
-      <div
-        className='carbon-radio-button__sprite'
-        dangerouslySetInnerHTML={ { __html: this.radiobuttonSprite } } // eslint-disable react/no-danger
-      />
+      <div className='carbon-radio-button__sprite'>
+        { this.radiobuttonSprite }
+      </div>
     );
   }
 
