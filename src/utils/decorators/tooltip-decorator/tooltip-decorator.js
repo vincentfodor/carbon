@@ -107,7 +107,15 @@ const TooltipDecorator = ComposedComponent => class Component extends ComposedCo
      * @default center
      * @type {String}
      */
-    tooltipAlign: PropTypes.string
+    tooltipAlign: PropTypes.string,
+
+    /**
+     * The id attribute to give to the tooltip
+     *
+     * @property
+     * @type {String}
+     */
+    tooltipId: PropTypes.string
   });
 
   /**
@@ -334,6 +342,7 @@ const TooltipDecorator = ComposedComponent => class Component extends ComposedCo
       <Tooltip
         align={ this.props.tooltipAlign }
         data-element='tooltip'
+        id={ this.props.tooltipId }
         isVisible={ this.state.isVisible }
         position={ this.props.tooltipPosition }
         ref={ (comp) => { this._tooltip = comp; } }

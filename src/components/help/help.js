@@ -62,6 +62,8 @@ const Help = TooltipDecorator(class Help extends React.Component {
      */
     tooltipAlign: PropTypes.string,
 
+    ariaDescribedBy: PropTypes.string,
+
     /**
      * A path for the anchor
      *
@@ -103,10 +105,12 @@ const Help = TooltipDecorator(class Help extends React.Component {
         href={ this.props.href }
         target='_blank'
         rel='noopener noreferrer'
+        aria-describedby={ this.props.ariaDescribedBy }
         { ...tagComponent('help', this.props) }
       >
         <Icon
           type='help'
+          tooltipId={ this.props.ariaDescribedBy }
           tooltipMessage={ this.props.children }
           tooltipPosition={ this.props.tooltipPosition }
           tooltipAlign={ this.props.tooltipAlign }
