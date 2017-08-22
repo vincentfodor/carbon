@@ -1,5 +1,6 @@
 import moxios from 'moxios';
 import Service from './service';
+import Logger from '../logger'
 import { assign } from 'lodash';
 
 describe('Service', () => {
@@ -174,9 +175,25 @@ describe('Service', () => {
     };
 
     describe('errors', () => {
-      it('calls the GET endpoint', (done) => {
-        service.get(5, successSpy, errorSpy);
-        testEndpoint(done, 400, errorSpy);
+      describe('GET with function params', () => {
+        it('calls the GET endpoint', (done) => {
+          spyOn(Logger, 'deprecate');
+          service.get(5, successSpy, errorSpy);
+          testEndpoint(done, 400, errorSpy);
+          expect(Logger.deprecate).toHaveBeenCalled();
+        });
+      });
+
+      describe('GET with object params', () => {
+        it('calls the GET endpoint with query params', (done) => {
+          service.get(5, { query: { foo: 'bar' }, onSuccess: successSpy, onError: errorSpy });
+          testEndpoint(done, 400, errorSpy);
+        });
+
+        it('calls the GET endpoint without query params', (done) => {
+          service.get(5, { onSuccess: successSpy, onError: errorSpy });
+          testEndpoint(done, 400, errorSpy);
+        });
       });
 
       it('calls the POST endpoint', (done) => {
@@ -212,14 +229,20 @@ describe('Service', () => {
     });
 
     describe('success', () => {
-      it('calls the GET endpoint', (done) => {
-        service.get(5, successSpy, errorSpy);
-        testEndpoint(done, 200, successSpy);
+      describe('GET with function params', () => {
+        it('calls the GET endpoint', (done) => {
+          spyOn(Logger, 'deprecate');
+          service.get(5, successSpy, errorSpy);
+          testEndpoint(done, 200, successSpy);
+          expect(Logger.deprecate).toHaveBeenCalled();
+        });
       });
 
-      it('calls the POST endpoint', (done) => {
-        service.post({}, successSpy, errorSpy);
-        testEndpoint(done, 200, successSpy);
+      describe('GET with object params', () => {
+        it('calls the GET endpoint', (done) => {
+          service.get(5, { query: { foo: 'bar' }, onSuccess: successSpy, onError: errorSpy });
+          testEndpoint(done, 200, successSpy);
+        });
       });
 
       it('calls the PUT endpoint', (done) => {
