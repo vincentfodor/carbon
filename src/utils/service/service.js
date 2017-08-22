@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { assign } from 'lodash';
+import Logger from '../logger';
+import Serialize from './../../utils/helpers/serialize';
 
 /**
  * Global configuration for all service classes.
@@ -149,15 +151,36 @@ class Service {
    *
    * @method get
    * @param {Number} id - the ID of the resource.
-   * @param {Function} onSuccess - a callback to trigger on success
-   * @param {Function} onError - a callback to trigger on error
+   * @param {Object} options - an object with options for query params and success/error callbacks
+   * @param {Function} _onError - [Deprecated] a callback to trigger on error
    * @return {Void}
    */
-  get = (id, onSuccess, onError) => {
-    this.client.get(String(id)).then(
-      this.handleResponse.bind(this, onSuccess),
-      this.handleResponse.bind(this, onError)
-    );
+
+  get = (id, options, _onError) => {
+    let request;
+
+    if (typeof (options) === 'function') {
+      Logger.deprecate('Passing onSuccess and onError as seperate arguments is deprecated. Please use `get(1, { onSuccess: function, onError: function })`'); // eslint-disable-line max-len
+
+      request = this.client.get(id);
+
+      request.then(
+        this.handleResponse.bind(this, options),
+        this.handleResponse.bind(this, _onError)
+      );
+    } else {
+      if (typeof (options.query) === 'undefined') {
+        options.query = {};
+      }
+
+      options.query = Serialize(options.query);
+      request = this.client.get(id, options.query);
+
+      request.then(
+        this.handleResponse.bind(this, options.onSuccess),
+        this.handleResponse.bind(this, options.onError)
+      );
+    }
   }
 
   /**
