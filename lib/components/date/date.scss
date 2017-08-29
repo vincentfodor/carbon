@@ -1,0 +1,148 @@
+@import "./../../style-config/colors";
+@import "./../../style-config/z-index";
+@import "./../../style-config/mixins";
+
+$date__picker__border: $grey-light;
+$date__picker__header-color: $grey-dark-blue-70;
+$date__picker__header-border-color: $grey-dark-blue-80;
+$date__picker__cell-border-color: white;
+
+.carbon-date {
+  .icon-calendar:before {
+    position: relative;
+    right: -1px;
+    top: -1px;
+  }
+}
+
+.react-date-picker__month-view {
+  color: $date__picker__header-color;
+}
+
+.react-date-picker__month-view {
+  border-radius: 3px;
+  box-shadow: 0 20px 30px rgba($grey-shadow, 0.2);
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  width: 334px;
+  z-index: $z-datepicker;
+
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.react-date-picker__month-view-cell {
+  display: inline-block;
+  padding: 10px 12px;
+  width: percentage(1/7);
+}
+
+.react-date-picker__nav-bar {
+  background-color: $date__picker__header-color;
+  border-radius: 3px 3px 0 0;
+  color: white;
+  cursor: pointer;
+
+  >.react-date-picker__nav-bar-arrow,
+  >.react-date-picker__nav-bar-date {
+    display: inline-block;
+    padding: 8px 0px 12px;
+
+    &:active {
+      background-color: $grey-dark;
+    }
+  }
+
+  .react-date-picker__nav-bar-arrow {
+    font-size: 20px;
+    line-height: 20px;
+    width: 12%;
+  }
+
+  .react-date-picker__nav-bar-date {
+    text-align: center;
+    text-transform: capitalize;
+    width: 76%;
+  }
+}
+
+.react-date-picker__month-view-week-day-name {
+  background-color: $date__picker__cell-border-color;
+  color: $grey-dark;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 12px;
+}
+
+.dp-year,
+.dp-month,
+.dp-day,
+.react-date-picker__footer button {
+  background-color: $grey-dark-blue-10;
+  border-style: solid;
+  border-color: $date__picker__cell-border-color;
+  border-width: 0 3px 3px 3px;
+  color: $blue;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $azul;
+    color: $white;
+  }
+
+  +* {
+    border-left: 1px;
+  }
+}
+
+.react-date-picker__month-view-day--active {
+  background-color: $blue;
+  color: $white;
+}
+
+.react-date-picker__month-view-day--today {
+  background: $grey-dark-blue-70;
+  color: white;
+}
+
+.react-date-picker__month-view-day--prev-month,
+.react-date-picker__month-view-day--next-month {
+  background-color: white;
+
+  &:hover {
+    background-color: $blue;
+    color: white;
+  }
+}
+
+.carbon-date .common-input__field {
+  box-sizing: content-box;
+  /* i have to stop this being over-ridden by a prop that sets a style on the element */
+  /* this does have the benefit of removing inline and filter related styles */
+  width: 120px !important;
+}
+
+.carbon-date.common-input--with-icon .common-input__icon--error {
+  right: 5px;
+  top: 5px;
+}
+
+.carbon-date.common-input--with-icon .common-input__icon--warning {
+  right: 3px;
+  top: 6px;
+}
