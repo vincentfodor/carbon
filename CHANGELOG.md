@@ -4,6 +4,7 @@
 
 * `Message` - `children` prop is now optional. [#1543](https://github.com/Sage/carbon/issues/1543)
 * `Message` - `title` prop type has been changed from string to node. [#1543](https://github.com/Sage/carbon/issues/1543)
+* `ButtonToggle` now lets you add a `size` and a `grouped` prop.
 
 # 1.6.0
 
