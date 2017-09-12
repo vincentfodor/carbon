@@ -47,22 +47,46 @@ class ComponentPreview extends React.Component {
     );
   }
 
+  buildRows = () => {
+    let rows = [];
+
+    dndData.forEach((row, index) => {
+      rows.push(
+        <TableRow key={ row.get('id') } uniqueID={ row.get('id') } index={ index }>
+          <TableCell>{ row.get('name') }</TableCell>
+        </TableRow>
+      );
+    });
+
+    return rows;
+  }
+
   renderCode = () => {
     var code = this.compileCode();
     return <Code>{ code.toString() }</Code>
   }
 
   renderDemo = () => {
-    let code = this.compileCode(true),
-        components = [],
-        numberOfExamples = this.props.definition.get('numberOfExamples');
-
-    for (let i = 0; i < numberOfExamples; i++) {
-      let component = React.cloneElement(code.toComponent(), { key: i });
-      components.push(component);
-    }
-
-    ReactDOM.render(<div>{ components }</div>, this.refs.demo);
+    ReactDOM.render(
+      <DraggableContext
+        onDrag={ updateDndData }
+      >
+        <div>
+          <Table tbody={false}>
+            <thead>
+              <TableRow as="header">
+                <TableHeader />
+                <TableHeader>Country</TableHeader>
+              </TableRow>
+            </thead>
+            <tbody>
+              { this.buildRows() }
+            </tbody>
+          </Table>
+        </div>
+      </DraggableContext>,
+      this.refs.demo
+    );
   }
 
 
