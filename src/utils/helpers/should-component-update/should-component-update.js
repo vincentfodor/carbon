@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import { isEqualWith } from 'lodash';
+import isEqualWith from 'lodash/isEqualWith';
 
 /**
  * A shouldComponentUpdate helper. Run this method with your instance, nextProps and nextState

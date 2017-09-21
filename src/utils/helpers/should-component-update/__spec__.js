@@ -1,7 +1,7 @@
 import shouldComponentUpdate from './should-component-update';
 import Immutable from 'immutable';
 import PresenceValidator from './../../validations/presence';
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 
 describe('shouldComponentUpdate', () => {
   let instance, nextProps, nextState;

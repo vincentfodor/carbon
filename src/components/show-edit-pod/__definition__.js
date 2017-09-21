@@ -2,7 +2,7 @@ import ShowEditPod from './';
 import Definition from './../../../demo/utils/definition';
 import OptionsHelper from 'utils/helpers/options-helper';
 import formDefinition from './../form/__definition__';
-import { assign } from 'lodash';
+import assign from 'lodash/assign';
 
 let definition = new Definition('show-edit-pod', ShowEditPod, {
   description: `Presents and edits a set of content that’s grouped together visually (in one pre-configured component).`,

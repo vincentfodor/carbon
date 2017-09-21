@@ -1,6 +1,6 @@
 import moxios from 'moxios';
 import Service from './service';
-import { assign } from 'lodash';
+import assign from 'lodash/assign';
 
 describe('Service', () => {
   let service, onSuccessSpy, onErrorSpy;

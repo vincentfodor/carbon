@@ -1,5 +1,5 @@
 import Flux from 'flux';
-import { assign } from 'lodash';
+import assign from 'lodash/assign';
 
 export const Dispatcher = new Flux.Dispatcher();
 

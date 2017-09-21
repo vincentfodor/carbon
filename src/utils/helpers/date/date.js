@@ -1,6 +1,6 @@
 import I18n from 'i18n-js';
 import moment from 'moment';
-import { merge } from 'lodash';
+import merge from 'lodash/merge';
 
 /**
  * DateHelper used to encapsulate the date parsing library into a single helper

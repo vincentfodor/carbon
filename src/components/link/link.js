@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { assign } from 'lodash';
+import assign from 'lodash/assign';
 import { Link } from 'react-router';
 import Icon from './../icon';
 import { validProps } from '../../utils/ether';

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Serialize from 'form-serialize';
-import { kebabCase } from 'lodash';
+import kebabCase from 'lodash/kebabCase';
 
 import CancelButton from './cancel-button';
 import FormSummary from './form-summary';

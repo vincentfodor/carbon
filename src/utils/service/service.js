@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { assign } from 'lodash';
+import assign from 'lodash/assign';
 
 /**
  * Global configuration for all service classes.

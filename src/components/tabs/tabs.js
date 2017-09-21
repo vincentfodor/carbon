@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
-import { compact } from 'lodash';
+import compact from 'lodash/compact';
 import classNames from 'classnames';
 import Tab from './tab';
 import Event from './../../utils/helpers/events';

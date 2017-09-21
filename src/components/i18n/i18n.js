@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from 'i18n-js';
 import _marked from 'marked';
-import { assign } from 'lodash';
+import assign from 'lodash/assign';
 import tagComponent from '../../utils/helpers/tags';
 
 /**

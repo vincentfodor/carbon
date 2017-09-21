@@ -1,7 +1,7 @@
 import React from 'react';
 import I18n from 'i18n-js';
 import classNames from 'classnames';
-import { assign } from 'lodash';
+import assign from 'lodash/assign';
 import PropTypes from 'prop-types';
 import Dialog from '../dialog';
 import Button from '../button';

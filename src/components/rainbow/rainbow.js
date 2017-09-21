@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { merge } from 'lodash';
+import merge from 'lodash/merge';
 import tagComponent from '../../utils/helpers/tags';
 
 /**

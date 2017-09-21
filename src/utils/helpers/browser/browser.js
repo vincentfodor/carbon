@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { keys } from 'lodash';
+import keys from 'lodash/keys';
 import Form from './../../../components/form';
 
 /**

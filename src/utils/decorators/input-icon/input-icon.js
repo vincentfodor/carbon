@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { assign } from 'lodash';
+import assign from 'lodash/assign';
 
 import Icon from './../../../components/icon';
 

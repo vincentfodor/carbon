@@ -2,7 +2,7 @@ import React from 'react';
 import ColorOption from './color-option';
 import SimpleColorPicker from './';
 import { mount, shallow } from 'enzyme';
-import { findIndex } from 'lodash';
+import findIndex from 'lodash/findIndex';
 import { rootTagTest } from '../../utils/helpers/tags/tags-specs';
 
 describe('SimpleColorPicker', () => {
