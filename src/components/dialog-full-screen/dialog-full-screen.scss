@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: $z-dialog;
+  z-index: $z-full-screen-dialog;
 }
 
 .carbon-dialog-full-screen__content {
@@ -28,7 +28,7 @@
   display: block;
   margin-top: -8px;
   position: absolute;
-  right: $padding-left-right;
+  right: 40px;
   top: $title-height / 2;
   z-index: $z-dialog;
 
