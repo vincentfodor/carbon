@@ -1,3 +1,9 @@
+# 2.5.0
+
+## Improvements
+
+* Handles an empty body (such as that with a 204) more robustly ([#1631](https://github.com/Sage/carbon/issues/1631))
+
 # 2.4.0
 
 ## Improvements
