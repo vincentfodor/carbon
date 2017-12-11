@@ -4,7 +4,7 @@ import Immutable from 'immutable';
 import { Table, TableHeader, TableRow, TableCell } from './table';
 import ActionToolbar from './../action-toolbar';
 import Link from './../link';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { rootTagTest } from '../../utils/helpers/tags/tags-specs';
 
 describe('Table', () => {
@@ -14,7 +14,7 @@ describe('Table', () => {
     spy = jasmine.createSpy('onChange spy');
 
     row = (
-      <TableRow>
+      <TableRow >
         <TableCell />
         <TableCell />
         <TableCell />
@@ -685,7 +685,7 @@ describe('Table', () => {
     let onConfigureSpy = jasmine.createSpy();
     let wrapper;
     beforeEach(() => {
-      wrapper = shallow(
+      wrapper = mount(
         <Table
           className="foo"
           onConfigure={ onConfigureSpy }
