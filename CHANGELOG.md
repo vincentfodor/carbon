@@ -1,3 +1,10 @@
+# 2.5.2
+
+## Bug Fixes
+
+* Adding a transform to an instance of a service class was applying the transform to all other instances. This change ensures the transform is only applied to the specific instance.
+* Remove space from clearfix psuedoclasses that was creating a space character that was pushing layouts out of line
+
 # 2.5.1
 
 ## Fixes
