@@ -190,7 +190,6 @@ describe('Dropdown', () => {
 
   describe('handleMouseEnterList', () => {
     it('sets blockBlur to true', () => {
-      instance.setState({open:true});
       instance.blockBlur = false;
       TestUtils.Simulate.mouseEnter(instance.listBlock);
       expect(instance.blockBlur).toBeTruthy;
@@ -199,7 +198,6 @@ describe('Dropdown', () => {
 
   describe('handleMouseLeaveList', () => {
     it('sets blockBlur to true', () => {
-      instance.setState({open:true});
       instance.blockBlur = true;
       TestUtils.Simulate.mouseLeave(instance.listBlock);
       expect(instance.blockBlur).toBeFalsy;
@@ -214,7 +212,6 @@ describe('Dropdown', () => {
 
     describe('if target is the list', () => {
       it('calls focus on the input after a timeout', () => {
-        instance.setState({open:true});
         TestUtils.Simulate.mouseDown(instance.listBlock, {
           target: instance.list
         });
@@ -225,7 +222,6 @@ describe('Dropdown', () => {
 
     describe('if target is not the list', () => {
       it('does not call focus on the input', () => {
-        instance.setState({open:true});
         TestUtils.Simulate.mouseDown(instance.listBlock, {
           target: 'foo'
         });
@@ -922,7 +918,7 @@ describe('Dropdown', () => {
     describe('when showArrow is false', () => {
       it('does not return the icon', () => {
         spyOn(instance, 'showArrow').and.returnValue(false);
-        expect(instance.additionalInputContent.length).toEqual(0);
+        expect(instance.additionalInputContent.length).toEqual(1);
       });
     });
 
@@ -933,7 +929,6 @@ describe('Dropdown', () => {
           options={ Immutable.fromJS([{ id: 1, name: 'foo' }, { id: 2, name: 'bar' }]) } value='1'
         />);
 
-      wrapper.find('.carbon-dropdown__input').simulate('focus');
       const portalDropdownList = wrapper.find(Portal).find('.carbon-dropdown__list');
       expect(portalDropdownList).toMatchSnapshot();
     });
