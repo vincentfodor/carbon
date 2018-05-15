@@ -31,7 +31,7 @@ global.Highcharts = Highcharts;
 global.imagePath = config.imagePath;
 
 setupI18n();
-enableMock();
+// enableMock();
 
 const routes = (
   <Route component={ Chrome }>
@@ -44,3 +44,8 @@ const routes = (
 );
 
 startRouter(routes);
+
+
+if (module.hot) {
+  module.hot.accept();
+}

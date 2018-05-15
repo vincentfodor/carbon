@@ -7,6 +7,8 @@
     "npm": "^5.0.0"
   },
   "scripts": {
+    "start": "node_modules/.bin/webpack-dev-server",
+    "build": "NODE_ENV=production node_modules/.bin/webpack",
     "set-config": "node -e \"require('./script/set-config').default()\"",
     "test": "jest --config=./jest.conf.json",
     "debug": "node --inspect ./node_modules/.bin/jest --watch --config=./jest.conf.json",
@@ -31,7 +33,7 @@
   },
   "devDependencies": {
     "babel-standalone": "~6.17.0",
-    "carbon-factory": "3.3.3",
+    "carbon-factory": "git+ssh://git@github.com/Sage/carbon-factory.git#build-webpack",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "express": "~4.14.0",
