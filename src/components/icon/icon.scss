@@ -57,9 +57,9 @@ $iconSizes: (
 
 @font-face {
   font-family: 'CarbonIcons';
-  src: url('#{$font-path}/carbon-icons-webfont.woff') format('woff'),
-       url('#{$font-path}/carbon-icons-webfont.ttf') format('truetype'),
-       url('#{$font-path}/carbon-icons-webfont.svg#CarbonIcons') format('svg');
+  src: url(fonts/carbon-icons-webfont.woff) format('woff'),
+       url(fonts/carbon-icons-webfont.ttf) format('truetype'),
+       url(fonts/carbon-icons-webfont.svg#CarbonIcons) format('svg');
   font-weight: normal;
   font-style: normal;
 }
