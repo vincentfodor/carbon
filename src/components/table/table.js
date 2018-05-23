@@ -18,6 +18,9 @@ import DraggableTableCell from './draggable-table-cell';
 import Pager from './../pager';
 import Spinner from './../spinner';
 
+import './table.scss';
+import './table--secondary-theme.scss';
+
 /**
  * A Table widget.
  *
