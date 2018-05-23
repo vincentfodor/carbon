@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DayPicker from 'react-day-picker';
 import LocaleUtils from 'react-day-picker/moment';
+import 'react-day-picker/lib/style.css';
+import './date.scss';
 import I18n from 'i18n-js';
 import Navbar from './navbar';
 import Portal from './../portal';
