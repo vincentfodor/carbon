@@ -444,7 +444,11 @@ class Carousel extends React.Component {
 
     return (
       <div className={ this.previousClasses() }>
-        <button { ...this.previousButtonProps() } data-element='previous'>
+        <button
+          { ...this.previousButtonProps() }
+          data-element='previous'
+          type='button'
+        >
           <Icon className='carbon-carousel__previous-arrow' type='dropdown' />
         </button>
       </div>
@@ -461,7 +465,11 @@ class Carousel extends React.Component {
 
     return (
       <div className={ this.nextClasses() }>
-        <button { ...this.nextButtonProps() } data-element='next'>
+        <button
+          { ...this.nextButtonProps() }
+          data-element='next'
+          type='button'
+        >
           <Icon className='carbon-carousel__next-arrow' type='dropdown' />
         </button>
       </div>

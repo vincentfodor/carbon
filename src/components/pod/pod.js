@@ -301,7 +301,7 @@ class Pod extends React.Component {
    * @method toggleCollapse
    */
   toggleCollapse = () => {
-    this.setState({ collapsed: !this.state.collapsed });
+    this.setState(prevState => ({ collapsed: !prevState.collapsed }));
   }
 
   get mainClasses() {

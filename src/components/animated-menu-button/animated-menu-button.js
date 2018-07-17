@@ -220,6 +220,7 @@ class AnimatedMenuButton extends React.Component {
         key='close'
         onClick={ this.closeHandler }
         ref={ (comp) => { this._closeIcon = comp; } }
+        type='button'
       >
         <Icon type='close' />
       </button>

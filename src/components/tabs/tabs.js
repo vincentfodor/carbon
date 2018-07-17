@@ -255,7 +255,7 @@ class Tabs extends React.Component {
    * @param {Boolean} state of tab child
    */
   changeValidity = (id, valid) => {
-    this.setState({ tabValidity: this.state.tabValidity.set(id, valid) });
+    this.setState(prevState => ({ tabValidity: prevState.tabValidity.set(id, valid) }));
   }
 
   /**
@@ -266,7 +266,7 @@ class Tabs extends React.Component {
    * @param {Boolean} state of tab child
    */
   changeWarning = (id, warning) => {
-    this.setState({ tabWarning: this.state.tabWarning.set(id, warning) });
+    this.setState(prevState => ({ tabWarning: prevState.tabWarning.set(id, warning) }));
   }
 
   /**

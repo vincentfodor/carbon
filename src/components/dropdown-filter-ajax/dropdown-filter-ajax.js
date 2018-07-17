@@ -158,9 +158,11 @@ class DropdownFilterAjax extends DropdownFilter {
    */
   handleBlur = () => {
     if (!this.blockBlur) {
-      const filter = this.props.create ? this.state.filter : null;
       // close list and reset filter
-      this.setState({ open: false, filter });
+      this.setState(prevState => ({
+        open: false,
+        filter: this.props.create ? prevState.filter : null
+      }));
 
       if (this.props.onBlur) {
         this.props.onBlur();

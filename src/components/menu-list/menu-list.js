@@ -122,7 +122,7 @@ class MenuList extends React.Component {
   }
 
   toggleChildren() {
-    this.setState({ open: !this.state.open });
+    this.setState(prevState => ({ open: !prevState.open }));
   }
 
   /** Helpers * */

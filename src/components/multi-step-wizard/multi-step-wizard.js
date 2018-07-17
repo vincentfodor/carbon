@@ -239,7 +239,7 @@ class MultiStepWizard extends React.Component {
    */
   next = () => {
     if (this.state.currentStep < this.totalSteps) {
-      this.setState({ currentStep: this.state.currentStep + 1 });
+      this.setState(prevState => ({ currentStep: prevState.currentStep + 1 }));
     }
   }
 
@@ -251,7 +251,7 @@ class MultiStepWizard extends React.Component {
    */
   back = () => {
     if (this.state.currentStep > 1) {
-      this.setState({ completed: false, currentStep: this.state.currentStep - 1 });
+      this.setState(prevState => ({ completed: false, currentStep: prevState.currentStep - 1 }));
     }
   }
 
