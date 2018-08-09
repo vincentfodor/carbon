@@ -1,90 +1,63 @@
 import React from 'react';
-import { transform } from 'babel-standalone';
-import './sandbox.scss';
+import ImmutableHelper from 'utils/helpers/immutable';
+import connect from 'utils/flux/connect';
+import Store from 'utils/flux/store';
+import Dispatcher from './../../../dispatcher';
+import { DraggableContext } from 'components/drag-and-drop';
+import { Table, TableRow, TableCell } from 'components/table';
 
-class Preview extends React.Component {
-  state = {
-    error: false
-  }
-
-  compile = () => {
-    let code = this.props.code;
-
-    if (code.length === 0) {
-      code = '<div />';
-    }
-
-    try {
-      const compiledCode = eval(transform(code, { presets: ['es2015', 'react'] }).code)
-      this._lastWorkingExample = code;
-      if (this.state.error) setTimeout(() => { this.setState({ error: false }) });
-      return compiledCode;
-    } catch(err) {
-      setTimeout(() => { this.setState({ error: err.message }) });
-      return eval(transform(this._lastWorkingExample, { presets: ['es2015', 'react'] }).code)
-    }
-  }
-
-  render() {
-    return (
-      <div className='sandbox-preview'>
-        { this.compile() }
-        { this.state.error && (
-          <div className='sandbox-error'>
-            <strong>Render failed:</strong> there is a syntax error!<br />
-            { this.state.error }
-          </div>
-        ) }
-      </div>
-    );
-  }
+const arr = [];
+for (let i = 0; i < 500; i++) {
+  arr.push({ id: i, name: `foo ${i}` });
 }
 
-class Sandbox extends React.Component {
-  state = {
-    code: ''
+class DNDStore extends Store {
+  dndupdate = action => {
+    let rows = this.data.get('rows');
+    const sourceItem = rows.get(action.oldIndex);
+    rows = rows.delete(action.oldIndex);
+    this.data = this.data.set('rows', rows.insert(action.newIndex, sourceItem));
   }
+}
+const DNDStoreInstance = new DNDStore('dndstore', ImmutableHelper.parseJSON({ rows: arr }));
 
-  updateCode = (ev) => {
-    this.setState({ code: ev.target.value });
-  }
-
-  catchTab = (ev) => {
-    if (ev.keyCode === 9) {
-      ev.preventDefault();
-      const input = ev.target;
-      const startPos = input.selectionStart;
-      const endPos = input.selectionEnd;
-      const newValue = input.value.substring(0, startPos)
-        + '  '
-        + input.value.substring(endPos, input.value.length);
-
-      this.setState({ code: newValue }, () => {
-        const newPos = startPos + 2;
-        input.setSelectionRange(newPos, newPos);
-      });
-    }
-  }
-
+class DNDExample extends React.Component {
   render() {
     return(
-      <div className={ `sandbox sandbox-orientation-${ this.state.orientation ? 'horizontal' : 'vertical' }` }>
-        <Preview code={ this.state.code } />
-        <textarea
-          autoFocus
-          className='sandbox-input'
-          onChange={ this.updateCode }
-          onKeyDown={ this.catchTab }
-          value={ this.state.code }
-        />
-        <input
-          className='sandbox-orientation'
-          type='checkbox'
-          onChange={ () => { this.setState({ orientation: !this.state.orientation }) } }
-        />
-      </div>
+      <DraggableContext onDrag={ updateDndData }>
+        <Table tbody={false}>
+          <tbody>
+            { buildRows(this.props.rows) }
+          </tbody>
+        </Table>
+      </DraggableContext>
     )
   }
 };
 
-export default Sandbox;
+function updateDndData(dragIndex, hoverIndex) {
+  Dispatcher.dispatch({
+    actionType: 'dndupdate',
+    oldIndex: dragIndex,
+    newIndex: hoverIndex
+  });
+}
+
+function buildRows(rows) {
+  if (!rows) return;
+  return rows.map((row, index) => {
+    return (
+      <TableRow key={ row.get('id') } uniqueID={ row.get('id') } index={ index }>
+        <TableCell>{ row.get('name') }</TableCell>
+      </TableRow>
+    );
+  });
+}
+
+const ConnectedDNDExample = connect(DNDStoreInstance, (dndstate) => {
+  return {
+    rows: dndstate.get('rows')
+  }
+})(DNDExample);
+
+export default ConnectedDNDExample;

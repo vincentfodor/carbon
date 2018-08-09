@@ -187,6 +187,14 @@ class TableRow extends React.Component {
     selected: false
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    if (typeof nextProps.index === 'undefined') return true;
+    if (nextProps.index != this.props.index) return true;
+    if (!this.draggingIsOccurring()) return true;
+    if (this.context.dragAndDropActiveIndex === this.props.index && (typeof nextContext.dragAndDropActiveIndex !== 'number')) return true;
+    return false;
+  }
+
   /**
    * @method componentWillMount
    * @return {Void}
