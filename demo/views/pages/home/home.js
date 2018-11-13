@@ -8,23 +8,24 @@ import SellingPoints from './selling-points';
 import Sectioniser from './sectioniser';
 import Wrapper from './../../common/wrapper';
 
+import Pod from 'components/pod';
+import Select from 'components/select/select';
+import Option from 'components/select/option';
+
 class Home extends React.Component {
   /**
    * @method render
    */
   render() {
     return (
-      <Sectioniser
-        minDepth='2'
-        maxDepth='5'
-      >
-        <PageHeaderLarge />
-
-        <ComponentShowcase />
-        <SellingPoints />
-        <SageLovesCarbon />
-        <GetStarted />
-      </Sectioniser>
+      <Pod>
+        <Select label='A Select Component'>
+          <Option value='1'>hello</Option>
+          <Option value='2'>bye</Option>
+          <Option value='3'>ok</Option>
+          <Option value='4'>errrr</Option>
+        </Select>
+      </Pod>
     );
   }
 }

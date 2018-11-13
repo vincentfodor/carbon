@@ -267,6 +267,7 @@ const Input = (ComposedComponent) => {
 
       // Remove data-role as this should be applied on the top level element
       delete inputProps['data-role'];
+      delete inputProps['children'];
 
       return inputProps;
     }
