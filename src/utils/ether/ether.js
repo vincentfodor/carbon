@@ -59,6 +59,7 @@ function styleElement(element, attribute, value) {
  */
 function validProps(instance, safeProps) {
   const klass = instance.constructor;
+  return instance.props;
   const unsafeProps = difference(Object.keys(klass.propTypes), safeProps || klass.safeProps || []);
   return omit(instance.props, unsafeProps);
 }

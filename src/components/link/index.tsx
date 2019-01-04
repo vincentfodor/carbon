@@ -45,8 +45,8 @@ class _Link extends React.Component<_LinkProps, {}> {
     tabbable: true
   };
   static safeProps = ["onClick"];
-  constructor() {
-    super({});
+  constructor(...args) {
+    super(...args);
     this.onKeyDown = this.onKeyDown.bind(this);
   }
   /**

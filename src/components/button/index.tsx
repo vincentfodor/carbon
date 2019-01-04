@@ -5,7 +5,7 @@ import Link from "../link";
 import { validProps } from "../../utils/ether";
 import tagComponent from "../../utils/helpers/tags";
 import "./button.scss";
-type ButtonProps = {
+interface ButtonProps {
   as?: string,
   disabled?: boolean,
   theme?: string,
@@ -44,7 +44,7 @@ class Button extends React.Component<ButtonProps, {}> {
     subtext: ""
   };
   constructor(...args) {
-    super({}, ...args);
+    super(...args);
     this.element = this.element.bind(this);
   }
   /**
