@@ -5,6 +5,7 @@
     "target": "es5",
     "lib": ["es6", "dom"],
     "sourceMap": true,
+    "emitDeclarationOnly": true,
     "jsx": "react",
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
@@ -16,9 +17,8 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true
   },
-  "exclude": [
-    "node_modules",
-    "demo"
+  "include": [
+    "lib"
   ],
   "rules": {
     "object-literal-sort-keys": false,
