@@ -89,4 +89,37 @@ describe('Pill', () => {
       rootTagTest(wrapper, 'pill', 'bar', 'baz');
     });
   });
+
+  describe('onDelete adds "close" icon to component', () => {
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <Pill
+          children='My Text'
+          onDelete={ spy }
+        />
+      );
+    });
+
+    it('includes "close" icon when onDelete prop passed', () => {
+      let icon = wrapper.find('[data-element="close"]');
+      expect(icon.length).toEqual(1); 
+    });
+
+    it('triggers the click when the icon is clicked', () => {
+      wrapper.find('[data-element="close"]').simulate('click');
+      expect(spy).toHaveBeenCalled(); 
+    });
+
+    it('does not include "close" icon when onDelete prop not passed', () => {
+      wrapper = shallow(
+        <Pill
+          children='My Text'
+        />
+      );
+      let icon = wrapper.find('[data-element="close"]');
+      expect(icon.length).toEqual(0); 
+    });
+  });
 });
