@@ -51,5 +51,4 @@ Input.propTypes = {
   onBlur: PropTypes.func,
   onFocus: PropTypes.func
 };
-
 export default Input;

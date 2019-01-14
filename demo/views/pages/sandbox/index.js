@@ -1,6 +1,9 @@
 import React from 'react';
 import { transform } from 'babel-standalone';
 import './sandbox.scss';
+import { InputPresentation } from '../../../../src/__experimental__/components/input';
+import Textbox from '../../../../src/__experimental__/components/textbox';
+import Pill from '../../../../src/components/pill';
 
 class Preview extends React.Component {
   state = {
@@ -70,19 +73,9 @@ class Sandbox extends React.Component {
     return(
       <div className={ `sandbox sandbox-orientation-${ this.state.orientation ? 'horizontal' : 'vertical' }` }>
         <Preview code={ this.state.code } />
-        <textarea
-          autoFocus
-          className='sandbox-input'
-          onChange={ this.updateCode }
-          onKeyDown={ this.catchTab }
-          value={ this.state.code }
-        />
-        <input
-          className='sandbox-orientation'
-          type='checkbox'
-          onChange={ () => { this.setState({ orientation: !this.state.orientation }) } }
-        />
+        
       </div>
+       
     )
   }
 };

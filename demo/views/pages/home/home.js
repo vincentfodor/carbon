@@ -1,10 +1,10 @@
 import React from 'react';
-import Sectioniser from './sectioniser';
+// import Sectioniser from './sectioniser';
 
 import ScrollableList from '../../../../src/components/scrollable-list';
 import './demo-site.scss';
 
-class Home extends React.Component {
+class Home extends React.PureComponent {
   /**
    * @method render
    */
@@ -12,14 +12,14 @@ class Home extends React.Component {
     return (
       <div style={{ height: '100vh'}}>
 
-        <ScrollableList 
+        <ScrollableList
           onLazyLoad={() => console.log('lazy load now')}
-          keyNavigation  
+          keyNavigation
         >
           {[...Array(15).keys()].map(i => <div>{`Item: ${i}`}</div>)}
         </ScrollableList>
       </div>
-     
+
     );
   }
 }
