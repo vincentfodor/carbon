@@ -19,7 +19,8 @@ let definition = new Definition('pill', Pill, {
     children: "Node",
     className: 'String',
     fill: "Boolean",
-    onClick: 'Function'
+    onClick: 'Function',
+    onDelete: 'Function'
   },
   propValues: {
     children: "Pill"
@@ -29,7 +30,8 @@ let definition = new Definition('pill', Pill, {
     children: "This component supports children.",
     className: "Classes to apply to the component.",
     fill: "Fills the pill background with colour. When fill is false only the border is coloured.",
-    onClick: "Callback function for when the pill is clicked"
+    onClick: "Callback function for when the pill is clicked",
+    onDelete: "Callback function to delete the component, when the added Icon is clicked"
   },
 });
 
