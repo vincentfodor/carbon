@@ -1,9 +1,9 @@
 import React from 'react';
 import { transform } from 'babel-standalone';
 import './sandbox.scss';
-import { InputPresentation } from '../../../../src/__experimental__/components/input';
-import Textbox from '../../../../src/__experimental__/components/textbox';
-import Pill from '../../../../src/components/pill';
+import MultiSelect from '../../../../src/__experimental__/components/multi-select-dropdown';
+// import ScrollableList from '../../../../src/components/scrollable-list';
+
 
 class Preview extends React.Component {
   state = {
@@ -71,13 +71,11 @@ class Sandbox extends React.Component {
 
   render() {
     return(
-      <div className={ `sandbox sandbox-orientation-${ this.state.orientation ? 'horizontal' : 'vertical' }` }>
-        <Preview code={ this.state.code } />
-        
+      <div>
+          <MultiSelect />
       </div>
-       
-    )
+    );
   }
-};
+}
 
 export default Sandbox;

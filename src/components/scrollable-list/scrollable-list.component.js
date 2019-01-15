@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import tagComponent from '../../utils/helpers/tags';
-// import ScrollableListItem from './scrollable-list-item.component';
+import ScrollableListItem from './scrollable-list-item.component';
 import ScrollableListContainer from './scrollable-list.style';
 import propTypes from './scrollable-list.proptypes';
 
