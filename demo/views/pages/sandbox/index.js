@@ -2,7 +2,7 @@ import React from 'react';
 import { transform } from 'babel-standalone';
 import './sandbox.scss';
 import MultiSelect from '../../../../src/__experimental__/components/multi-select-dropdown';
-// import ScrollableList from '../../../../src/components/scrollable-list';
+// import Textbox from '../../../../src/__experimental__/components/textbox';
 
 
 class Preview extends React.Component {
@@ -69,10 +69,29 @@ class Sandbox extends React.Component {
     }
   }
 
+  deletePillHandler = (i) => {
+    const { pills } = this.state;
+    pills.splice(i, 1);
+    const arr = pills.map((pill, index) => {
+      return (
+        <Pill
+          key={ i.toString() }
+          onDelete={ () => this.deletePillHandler(index) }
+        >
+          { pill.props.children }
+        </Pill>
+      );
+    });
+    this.setState({ pills: arr });
+  }
+
   render() {
     return(
       <div>
           <MultiSelect />
+          {/* <Textbox>
+            <Pill className='carbon-pill_with-icon' onDelete={ () => this.deletePillHandler(0) }>400 - Sales</Pill>
+          </Textbox> */}
       </div>
     );
   }
