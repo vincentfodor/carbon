@@ -9,12 +9,12 @@ export default class MultiSelect extends React.Component {
   // }
 
   state = {
-    hasFocus: false,
-    pills: []
+    pills: ['sam', 'ed', 'andrew']
   }
 
   createPillHandler = (text) => {
-    // const arr = [...Array(tot).keys()].map((_, i) => <Pill key={ i.toString() } as='warning' fill='true' onDelete={ () => this.deletePillHandler(i) }>SAM</Pill>);
+    // const arr = [...Array(tot).keys()].map((_, i) => <Pill key={ i.toString() }
+    // as='warning' fill='true' onDelete={ () => this.deletePillHandler(i) }>SAM</Pill>);
     // return arr;
     const { pills: oldPills } = this.state;
     // const index = oldPills.length - 1;
@@ -38,17 +38,13 @@ export default class MultiSelect extends React.Component {
   deletePillHandler = (i) => {
     const { pills } = this.state;
     pills.splice(i, 1);
-    const arr = pills.map((pill, index) => {
+    const arr = pills.map((pill) => {
       return (
-        <Pill
-          key={ i.toString() }
-          onDelete={ () => this.deletePillHandler(index) }
-        >
-          { pill.props.children }
-        </Pill>
+        pill
       );
     });
     this.setState({ pills: arr });
+    this.renderPills();
   }
 
   render() {
@@ -61,7 +57,7 @@ export default class MultiSelect extends React.Component {
           onLazyLoad={ () => console.log('lazy load now') }
           keyNavigation
         >
-          {[...Array(15).keys()].map(i => <div>{`Item: ${i}`}</div>)}
+          {[...Array(15).keys()].map(i => <div key={ i.toString() }>{`Item: ${i}`}</div>)}
         </ScrollableList>
       </div>
     );

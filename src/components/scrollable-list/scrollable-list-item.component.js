@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { ScrollableListContext } from './scrollable-list.component';
+import ScrollableListContext from './scrollable-list.context';
+import propTypes from './scrollable-list-item.proptypes';
 
 const Item = ({ className, id, children }) => {
   return (
@@ -12,13 +13,15 @@ const Item = ({ className, id, children }) => {
             className={ className }
             onClick={ () => context.onClick(id) }
           >
-            { children }
+            {children}
           </li>
         )
       }
     </ScrollableListContext.Consumer>
   );
 };
+
+Item.propTypes = propTypes;
 
 const ScrollableListItem = styled(Item)`
   width: 100%;
