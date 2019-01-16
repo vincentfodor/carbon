@@ -68,7 +68,6 @@ class ScrollableList extends Component {
   render() {
     const { children, onSelect } = this.props;
     const { selectedItem } = this.state;
-
     return (
       <ScrollableListContainer
         ref={ this.scrollBox }

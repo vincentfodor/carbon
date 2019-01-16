@@ -4,8 +4,8 @@ import Textbox from '../textbox';
 import ScrollableList from '../../../components/scrollable-list';
 
 export default class MultiSelect extends React.Component {
-  // static propTypes = {
-  //   children: PropTypes.node
+  // constructor() {
+  //   super();
   // }
 
   state = {
@@ -56,6 +56,7 @@ export default class MultiSelect extends React.Component {
         <ScrollableList
           onLazyLoad={ () => console.log('lazy load now') }
           keyNavigation
+          onSelect={ () => this.createPillHandler('ed') }
         >
           {[...Array(15).keys()].map(i => <div key={ i.toString() }>{`Item: ${i}`}</div>)}
         </ScrollableList>
