@@ -13,6 +13,7 @@ let definition = new Definition('pill', Pill, {
   propOptions: {
     as: OptionsHelper.colors
   },
+  toggleFunctions: ['onDelete'],
   hiddenProps: ['onClick'],
   propTypes: {
     as: "String",

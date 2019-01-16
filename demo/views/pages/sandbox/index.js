@@ -1,8 +1,8 @@
 import React from 'react';
 import { transform } from 'babel-standalone';
 import './sandbox.scss';
-import MultiSelect from '../../../../src/__experimental__/components/multi-select-dropdown';
-// import Textbox from '../../../../src/__experimental__/components/textbox';
+// import MultiSelect from '../../../../src/__experimental__/components/multi-select-dropdown';
+import Textbox from '../../../../src/__experimental__/components/textbox';
 
 
 class Preview extends React.Component {
@@ -88,10 +88,10 @@ class Sandbox extends React.Component {
   render() {
     return(
       <div>
-          <MultiSelect />
-          {/* <Textbox>
+          {/* <MultiSelect /> */}
+          <Textbox>
             <Pill className='carbon-pill_with-icon' onDelete={ () => this.deletePillHandler(0) }>400 - Sales</Pill>
-          </Textbox> */}
+          </Textbox>
       </div>
     );
   }
