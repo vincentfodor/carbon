@@ -183,6 +183,7 @@ class Select extends React.Component {
   renderMultiValues(values) {
     const canDelete = !this.props.disabled && !this.props.readOnly;
 
+    console.log('values', values);
     return (
       values.map((value, index) => (
         <div key={ value.value } className='carbon-select__pill'>
