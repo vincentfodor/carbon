@@ -12,14 +12,13 @@ class Sandbox extends React.Component {
         label='Choose Item'
         endpoint='/countries'
         value={ this.state.val }
-        onChange={ (ev) => {
-          console.log('event', ev.target.value);
-          this.setState({ val: ev.target.value });
+        onChange={ ev => this.setState({ val: [...ev.target.value] }) }
+        formatResponse={ (response) => {
+          return { ...response, data: { $items: response.data.$itemz } };
         } }
-        formatResponse={ response => ({ ...response, data: { $items: response.data.$itemz } }) }
       >
         {
-          items => items.map(item => <Option>{ item.foo }</Option>)
+          items => items.map(item => <Option value={ item.foo } text={ item.foo } />)
         }
       </SelectAsync>
     );
