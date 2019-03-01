@@ -32,6 +32,15 @@ const OptionsHelper = {
     'white'
   ],
 
+  buttonVariants: [
+    'primary',
+    'secondary',
+    'tertiary',
+    'destructive',
+    'icon-before',
+    'icon-after'
+  ],
+
   colors: [
     'default',
     'error',
@@ -213,6 +222,14 @@ const OptionsHelper = {
     'complete',
     'current',
     'incomplete'
+  ],
+
+  themes: [
+    'small',
+    'medium',
+    'large',
+    'generic',
+    'destructive'
   ],
 
   themesBinary: [
