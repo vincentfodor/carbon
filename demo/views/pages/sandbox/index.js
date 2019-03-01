@@ -85,7 +85,7 @@ class Sandbox extends React.Component {
           value={ this.state.val }
           onChange={ ev => this.setState({ val: [...ev.target.value] }) }
           formatResponse={ (response) => {
-            return { ...response, data: { $items: response.data.$itemz } };
+            return { ...response, data: { $page: response.data.$page, $items: response.data.$itemz, $total: response.data.$total } };
           } }
         >
           {

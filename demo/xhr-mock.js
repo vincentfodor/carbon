@@ -32,7 +32,6 @@ export function enableMock() {
     }
 
     const numberOfResults = filteredCountries.count();
-
     let i = 0;
     filteredCountries = filteredCountries.skip(skip).takeUntil(() => {
       i++;
@@ -44,7 +43,6 @@ export function enableMock() {
       $total: numberOfResults,
       $page: page
     };
-    // console.log('foo', data.$itemz);
 
     return res
       .status(201)
