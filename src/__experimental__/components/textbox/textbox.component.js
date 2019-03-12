@@ -26,6 +26,7 @@ const Textbox = ({
         label={ label }
         labelInline={ labelInline }
         labelAlign={ labelAlign }
+        size={ props.size }
       />
       <InputPresentation type='text' { ...props }>
         { leftChildren }

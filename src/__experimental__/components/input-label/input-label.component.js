@@ -33,11 +33,12 @@ const InputLabel = (props) => {
 
   return (
     <LabelStyle
-      htmlFor={ inputId } data-element='label'
+      htmlFor={ inputId }
+      data-element='label'
       { ...styleProps }
     >
-      {label}
-      {renderLabelHelp(labelHelp)}
+      { label }
+      { renderLabelHelp(labelHelp) }
     </LabelStyle>
   );
 };
@@ -68,7 +69,7 @@ InputLabel.propTypes = {
   /**
    * Text position of the inline label
    */
-  labelAlignRight: PropTypes.bool,
+  labelAlign: PropTypes.string,
   /**
    * Id of an input that is described by the label
    */
