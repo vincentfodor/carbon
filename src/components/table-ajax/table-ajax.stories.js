@@ -3,13 +3,12 @@ import { storiesOf } from '@storybook/react';
 import { text, boolean } from '@storybook/addon-knobs';
 import { State, Store } from '@sambego/storybook-state';
 import { enableMock } from '../../../demo/xhr-mock';
-import notes from './notes.md';
 import {
   TableAjax, TableRow, TableCell, TableHeader
 } from './table-ajax';
 import Button from '../button';
 import MultiActionButton from '../multi-action-button';
-import { StoryHeader, StoryCode, StoryCodeBlock } from '../../../.storybook/style/storybook-info.styles';
+import { info, notes } from './documentation';
 
 const store = new Store({
   sortOrder: 'asc',
@@ -20,13 +19,13 @@ const store = new Store({
 });
 
 const handleChange = (data) => {
-  store.set({ 
-    countryList: data.data[0].items,
+  store.set({
+    countryList: data.data[0].items
   });
   setTimeout(() => {
-    store.set({ 
+    store.set({
       children: buildRows()
-    })
+    });
   }, 500);
 };
 
@@ -68,8 +67,10 @@ storiesOf('Table Ajax', module)
       return (
         <State store={ store }>
           <TableAjax
-            actions={ { delete: { icon: 'bin' },
-            settings: { icon: 'settings' } } }
+            actions={ {
+              delete: { icon: 'bin' },
+              settings: { icon: 'settings' }
+            } }
             actionToolbarChildren={ (context) => {
               return [
                 <Button disabled={ context.disabled } key='single-action'>
@@ -96,32 +97,7 @@ storiesOf('Table Ajax', module)
       );
     },
     {
-      info: {
-        text: (
-          <div>
-            <p> Table Ajax component</p>
-
-            <StoryHeader> Implementation</StoryHeader>
-            <StoryCodeBlock>
-              {'import Table from "carbon-react/lib/components/table-ajax"'}
-              {'import { TableRow, TableCell, TableHeader } from "carbon-react/lib/components/table"'}
-            </StoryCodeBlock>
-
-            <p>
-              To render a<StoryCode> {'Table'} </StoryCode>
-              please see the
-              <StoryCode> {'Table'} </StoryCode>
-              component
-            </p>
-
-            <p>
-              <StoryCode> {'Table'} </StoryCode>
-              requires a<StoryCode> {'path'} </StoryCode>
-              to be provided
-            </p>
-          </div>
-        )
-      }
+      info: { text: info },
+      notes: { markdown: notes }
     },
-    { notes: { markdown: notes } }
   );
