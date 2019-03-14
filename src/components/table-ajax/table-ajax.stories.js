@@ -91,7 +91,6 @@ storiesOf('Table Ajax', module)
             paginate={ paginate }
             getCustomHeaders={ getCustomHeaders }
             onChange={ data => handleChange(data) }
-
           />
         </State>
       );
