@@ -3,6 +3,30 @@ import PropTypes from 'prop-types';
 import baseTheme from '../../../style/themes/base';
 import OptionsHelper from '../../../utils/helpers/options-helper';
 
+const sizes = {
+  small: {
+    height: '32px',
+    padding: '8px'
+  },
+  medium: {
+    height: '40px',
+    padding: '11px'
+  },
+  large: {
+    height: '48px',
+    padding: '13px'
+  },
+  classic: {
+    height: '31px',
+    padding: '6px'
+  }
+};
+
+const fetchSizedValueFor = attr => ({ size, theme }) => {
+  const sizeKey = theme.name === 'classic' ? 'classic' : size;
+  return sizes[sizeKey][attr];
+};
+
 const InputPresentationStyle = styled.div`
   align-items: center;
   background: transparent;
@@ -10,10 +34,12 @@ const InputPresentationStyle = styled.div`
   box-sizing: border-box;
   cursor: text;
   display: flex;
-  flex: 1;
   flex-wrap: wrap;
+  flex: 1;
   margin: 0px;
-  min-height: 32px;
+  min-height: ${fetchSizedValueFor('height')};
+  padding-left: ${fetchSizedValueFor('padding')};
+  padding-right: ${fetchSizedValueFor('padding')};
   width: 100%;
 
   &:hover {
@@ -35,11 +61,6 @@ const InputPresentationStyle = styled.div`
   ${renderValidationStyling('info')}
   ${renderValidationStyling('warning')}
   ${renderValidationStyling('error')}
-  ${({ size, theme }) => css`
-    min-height: ${theme.input[size].height};
-    padding-left: ${theme.input[size].padding};
-    padding-right: ${theme.input[size].padding};
-  `}
 `;
 
 InputPresentationStyle.defaultProps = {

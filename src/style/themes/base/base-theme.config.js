@@ -5,6 +5,8 @@ export default (palette) => {
       blackWithOpacity = atOpacity('#000000');
 
   return {
+    name: 'base',
+
     colors: {
       // main
       primary: palette.genericGreenTint(15),

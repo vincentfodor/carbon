@@ -1,6 +1,8 @@
 export default (palette) => {
   return (
     {
+      name: 'classic',
+
       colors: {
         base: palette.productGreen,
         primary: palette.productGreenShade(21),
@@ -11,10 +13,6 @@ export default (palette) => {
       input: {
         borderColor: '#ccd6db',
         gutter: '10px',
-        medium: {
-          height: '31px',
-          padding: '6px'
-        },
         hover: {
           borderColor: '#99adb6'
         },
