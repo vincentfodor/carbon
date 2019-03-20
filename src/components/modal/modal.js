@@ -203,8 +203,8 @@ class Modal extends React.Component {
   get backgroundHTML() {
     if (!this.props.enableBackgroundUI) {
       return (
-        <div 
-          className='carbon-modal__background' 
+        <div
+          className='carbon-modal__background'
         />
       );
     }
@@ -250,7 +250,7 @@ class Modal extends React.Component {
     return (
       <Portal key='1'>
         <div
-          className={ this.mainClasses } 
+          className={ this.mainClasses }
           { ...this.componentTags(this.props) }
           data-state={ this.state.state }
         >
