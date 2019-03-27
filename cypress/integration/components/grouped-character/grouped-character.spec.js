@@ -14,9 +14,6 @@ describe('Grouped Character', () => {
       setProp('groups', [1, 2, 3]);
       setProp('separator', '-');
     });
-    it('Renders to the screen', () => {
-      expect(true).to.equal(true);
-    });
     it('Groups text using a given group config', () => {
       const input = cy.iFrame('[data-component="input"]');
       input.type(testInput);
@@ -30,14 +27,17 @@ describe('Grouped Character', () => {
     it('deletes separators when a character just after it is deleted', () => {
       const input = cy.iFrame('[data-component="input"]');
       input.type(`${testInput}${keys.backspace.repeat(3)}`);
-  
       input.should('have.value', '1-23');
       input.type(`${testInput}${keys.backspace.repeat(5)}`);
       input.should('have.value', '1');
     });
-    it.only('cursor movement', () => {
-      const input = cy.iFrame('[data-component="input"]');
-      input.type(keys.allAlpha);
+    it.only('allows separators with a length greater than one', () => {
+      cy.iFrame('[data-component="input"]').then(() => {
+        setProp('separator', '--');
+        cy.getComponent('input').type(`${testInput}`);
+        cy.getComponent('input').should('have.value', '1--23--456');
+
+      });
     });
   });
 });

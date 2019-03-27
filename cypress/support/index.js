@@ -47,3 +47,9 @@ Cypress.Commands.add("iFrame",
         })
     }
 )
+
+Cypress.Commands.add('getComponent',
+  (componentName) => {
+    return cy.iFrame(`[data-component="${componentName}"`);
+  }
+)
