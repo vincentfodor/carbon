@@ -28,3 +28,4 @@ export const setProp = (name, value) => {
   knobsTab().click();
   cy.get(`[name=${name}]`).clear().type(typeSafeInput(value));
 };
+

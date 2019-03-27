@@ -1,7 +1,11 @@
 // Cypress test.
 import { visitExperimental, setProp } from '../../../support/helper';
+import keys from '../../../support/keyboard';
 
 const visitGroupedCharacter = visitExperimental('groupedcharacter');
+
+const testInput = '123456';
+const expectedOutput = '1-23-456';
 
 describe('Grouped Character', () => {
   describe('basic functionality', () => {
@@ -14,10 +18,26 @@ describe('Grouped Character', () => {
       expect(true).to.equal(true);
     });
     it('Groups text using a given group config', () => {
-      cy.get('#story-root > div > div > input').type('bllllllllll');
+      const input = cy.iFrame('[data-component="input"]');
+      input.type(testInput);
+      input.should('have.value', expectedOutput);
     });
     it('Does not exceed the character limit configured by the group', () => {
-      cy.get('#story-root > div > div > input').type('bllllllllll');
+      const input = cy.iFrame('[data-component="input"]');
+      input.type(`${testInput}${'7'}`);
+      input.should('have.value', expectedOutput);
+    });
+    it('deletes separators when a character just after it is deleted', () => {
+      const input = cy.iFrame('[data-component="input"]');
+      input.type(`${testInput}${keys.backspace.repeat(3)}`);
+  
+      input.should('have.value', '1-23');
+      input.type(`${testInput}${keys.backspace.repeat(5)}`);
+      input.should('have.value', '1');
+    });
+    it.only('cursor movement', () => {
+      const input = cy.iFrame('[data-component="input"]');
+      input.type(keys.allAlpha);
     });
   });
 });
