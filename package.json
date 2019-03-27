@@ -14,6 +14,7 @@
     "build": "npm run gen-colors && npm run gen-docs && cross-env NODE_ENV=production npm run webpack && npm run prep-deploy",
     "test": "jest --config=./jest.conf.json",
     "test-cypress": "cypress open",
+    "cypress": "cypress run",
     "debug": "node --inspect ./node_modules/jest-cli/bin/jest --watch --config=./jest.conf.json",
     "lint": "./node_modules/.bin/eslint",
     "lint-ts": "./node_modules/.bin/tslint 'src/**/*.ts'",
