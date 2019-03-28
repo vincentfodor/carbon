@@ -1,8 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Store, State } from '@sambego/storybook-state';
-import { text, object } from '@storybook/addon-knobs';
-import GroupedCharacter from './grouped-character.component';
+import { text, object, select } from '@storybook/addon-knobs';
+import GroupedCharacter from '.';
+import OptionsHelper from '../../../utils/helpers/options-helper';
 
 const groupedCharacterStore = new Store({
   value: ''
@@ -18,13 +19,10 @@ storiesOf('Experimental/GroupedCharacter', module)
     () => {
       const groups = object('groups', [2, 2, 4]);
       const separator = text('separator', '-');
-<<<<<<< HEAD
-=======
-
->>>>>>> FE-1285-grouped-character
       return (
         <State store={ groupedCharacterStore }>
           <GroupedCharacter
+            size={ select('size', OptionsHelper.sizesRestricted) }
             groups={ groups }
             separator={ separator }
             value={ groupedCharacterStore.get('value') }

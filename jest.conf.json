@@ -4,5 +4,6 @@
   "setupFiles": [
     "raf/polyfill",
     "./src/__spec_helper__/index.js"
-  ]
+  ],
+  "testPathIgnorePatterns": ["/cypress/"]
 }

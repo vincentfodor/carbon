@@ -36,7 +36,6 @@ describe('Grouped Character', () => {
         setProp('separator', '--');
         cy.getComponent('input').type(`${testInput}`);
         cy.getComponent('input').should('have.value', '1--23--456');
-
       });
     });
   });
