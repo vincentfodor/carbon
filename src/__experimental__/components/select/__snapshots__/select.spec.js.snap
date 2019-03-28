@@ -83,6 +83,7 @@ Object {
     <input
       autocomplete="off"
       class="sc-bxivhb wHvcT"
+      data-component="input"
       data-element="input"
       value=""
     />
