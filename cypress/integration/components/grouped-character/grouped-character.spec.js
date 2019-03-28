@@ -14,29 +14,25 @@ describe('Grouped Character', () => {
       setProp('groups', [1, 2, 3]);
       setProp('separator', '-');
     });
+    it('renders an input', () => {
+      cy.getComponent('input');
+    });
     it('Groups text using a given group config', () => {
-      const input = cy.iFrame('[data-component="input"]');
-      input.type(testInput);
-      input.should('have.value', expectedOutput);
+      cy.getComponent('input')
+        .type(testInput)
+        .should('have.value', expectedOutput);
     });
     it('Does not exceed the character limit configured by the group', () => {
-      const input = cy.iFrame('[data-component="input"]');
-      input.type(`${testInput}${'7'}`);
-      input.should('have.value', expectedOutput);
+      cy.getComponent('input')
+        .type(`${testInput}${'7'}`)
+        .should('have.value', expectedOutput);
     });
     it('deletes separators when a character just after it is deleted', () => {
-      const input = cy.iFrame('[data-component="input"]');
-      input.type(`${testInput}${keys.backspace.repeat(3)}`);
-      input.should('have.value', '1-23');
-      input.type(`${testInput}${keys.backspace.repeat(5)}`);
-      input.should('have.value', '1');
-    });
-    it.only('allows separators with a length greater than one', () => {
-      cy.iFrame('[data-component="input"]').then(() => {
-        setProp('separator', '--');
-        cy.getComponent('input').type(`${testInput}`);
-        cy.getComponent('input').should('have.value', '1--23--456');
-      });
+      cy.getComponent('input')
+        .type(`${testInput}${keys.backspace.repeat(3)}`)
+        .should('have.value', '1-23')
+        .type(`${testInput}${keys.backspace.repeat(5)}`)
+        .should('have.value', '1');
     });
   });
 });
