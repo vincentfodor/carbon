@@ -18,6 +18,10 @@ storiesOf('Experimental/GroupedCharacter', module)
     () => {
       const groups = object('groups', [2, 2, 4]);
       const separator = text('separator', '-');
+<<<<<<< HEAD
+=======
+
+>>>>>>> FE-1285-grouped-character
       return (
         <State store={ groupedCharacterStore }>
           <GroupedCharacter
