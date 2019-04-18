@@ -210,6 +210,9 @@ exports[`ShowEditPod edit form props where onDelete is provided should get throu
                                               "input": "#F2F4F5",
                                               "text": "rgba(0,0,0,0.3)",
                                             },
+                                            "help": Object {
+                                              "color": "rgba(0,0,0,0.65)",
+                                            },
                                             "name": "base",
                                             "shadows": Object {
                                               "cards": "0 3px 3px 0 rgba(0,20,29,0.2), 0 2px 4px 0 rgba(0,20,29,0.15)",
@@ -295,6 +298,9 @@ a {
                                                     "input": "#F2F4F5",
                                                     "text": "rgba(0,0,0,0.3)",
                                                   },
+                                                  "help": Object {
+                                                    "color": "rgba(0,0,0,0.65)",
+                                                  },
                                                   "name": "base",
                                                   "shadows": Object {
                                                     "cards": "0 3px 3px 0 rgba(0,20,29,0.2), 0 2px 4px 0 rgba(0,20,29,0.15)",
@@ -344,6 +350,9 @@ a {
                                                 "disabled": "rgba(0,0,0,0.55)",
                                                 "input": "#F2F4F5",
                                                 "text": "rgba(0,0,0,0.3)",
+                                              },
+                                              "help": Object {
+                                                "color": "rgba(0,0,0,0.65)",
                                               },
                                               "name": "base",
                                               "shadows": Object {

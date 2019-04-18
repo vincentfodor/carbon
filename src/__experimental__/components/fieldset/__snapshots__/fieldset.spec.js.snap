@@ -26,6 +26,9 @@ exports[`Fieldset Fieldset Legend applies classic theme styling 1`] = `
         "input": "#1e499f",
         "text": "#003349",
       },
+      "help": Object {
+        "color": "rgba(0,0,0,0.65)",
+      },
       "name": "classic",
       "shadows": Object {
         "cards": "0 3px 3px 0 rgba(0,20,29,0.2), 0 2px 4px 0 rgba(0,20,29,0.15)",
@@ -98,6 +101,9 @@ exports[`Fieldset Fieldset Legend applies classic theme styling 1`] = `
           "disabled": "#b3c2c8",
           "input": "#1e499f",
           "text": "#003349",
+        },
+        "help": Object {
+          "color": "rgba(0,0,0,0.65)",
         },
         "name": "classic",
         "shadows": Object {
