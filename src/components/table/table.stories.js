@@ -119,15 +119,16 @@ const pickInput = (name) => {
   const { inputTypes } = OptionsHelper;
   switch (name) {
     case inputTypes[1]:
-      return <TextArea { ...getTextboxStoryProps } />;
+      return <TextArea { ...getTextboxStoryProps } disabled />;
     case inputTypes[2]:
-      return <DateInput { ...getTextboxStoryProps } />;
+      return <DateInput { ...getTextboxStoryProps } disabled />;
     case inputTypes[3]:
       return (
         <Decimal
           { ...getTextboxStoryProps }
           value={ inputStore.get('decimalValue') }
           onChange={ (ev) => { inputStore.set({ decimalValue: ev.target.value }); } }
+          disabled
         />
       );
     case inputTypes[4]:
@@ -136,6 +137,7 @@ const pickInput = (name) => {
           <Select
             { ...getTextboxStoryProps }
             onChange={ (ev) => { inputStore.set({ selectValue: ev.target.value }); } }
+            disabled
           >
             <Option text='Amber' value='1' />
             <Option text='Black' value='2' />
@@ -145,7 +147,7 @@ const pickInput = (name) => {
         </State>
       );
     default:
-      return <TextBox { ...getTextboxStoryProps } />;
+      return <TextBox { ...getTextboxStoryProps } disabled />;
   }
 };
 
