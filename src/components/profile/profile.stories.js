@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { text, boolean } from '@storybook/addon-knobs';
-import Profile from './profile';
+import Profile from './profile.component';
 import { info, notes } from './documentation';
 
 storiesOf('Profile', module)
