@@ -1,14 +1,12 @@
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import TestRenderer from 'react-test-renderer';
 import Profile from './profile.component';
-import Portrait from '../portrait';
 import { elementsTagTest, rootTagTest } from '../../utils/helpers/tags/tags-specs';
 import Browser from '../../utils/helpers/browser';
 import { ProfileNameStyle, ProfileAvatarStyle } from './profile.style';
 import 'jest-styled-components';
-import { assertStyleMatch } from '../../__spec_helper__/test-utils';
 import ProfileClassicStyle from './profile-classic.style';
 import classicTheme from '../../style/themes/classic';
 
