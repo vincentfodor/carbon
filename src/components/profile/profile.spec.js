@@ -1,38 +1,34 @@
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
+import TestRenderer from 'react-test-renderer';
 import Profile from './profile.component';
 import Portrait from '../portrait';
 import { elementsTagTest, rootTagTest } from '../../utils/helpers/tags/tags-specs';
 import Browser from '../../utils/helpers/browser';
-import { ProfileNameStyle } from './profile.style';
+import { ProfileNameStyle, ProfileAvatarStyle } from './profile.style';
+import 'jest-styled-components';
+import { assertStyleMatch } from '../../__spec_helper__/test-utils';
+import ProfileClassicStyle from './profile-classic.style';
+import classicTheme from '../../style/themes/classic';
+
 
 describe('PortraitContainer', () => {
   let instance;
-
-  const mockCanvas = () => {
-    window.HTMLCanvasElement.prototype.getContext = () => {
-      return {
-        font: null,
-        textAlign: null,
-        fillStyle: null,
-        fillRect: jest.fn('fillRect'),
-        fillText: jest.fn('fillText')
-      };
-    };
-  };
+  const fillRectFn = jest.fn();
+  const fillTextFn = jest.fn();
 
   beforeAll(() => {
     spyOn(Browser, 'getDocument').and.returnValue({
-      createElement: (element) => {
+      createElement: () => {
         return {
-          getContext: (context) => {
+          getContext: () => {
             return {
               font: null,
               textAlign: null,
               fillStyle: null,
-              fillRect: jest.fn('fillRect'),
-              fillText: jest.fn('fillText')
+              fillRect: fillRectFn,
+              fillText: fillTextFn
             };
           },
           width: 10,
@@ -47,9 +43,8 @@ describe('PortraitContainer', () => {
 
   describe('render', () => {
     beforeEach(() => {
-      instance = TestUtils.renderIntoDocument(
+      instance = shallow(
         <Profile
-          className='foo'
           name='Foo'
           email='foo@bar.com'
           initials='FB'
@@ -59,28 +54,23 @@ describe('PortraitContainer', () => {
 
     describe('classes', () => {
       it('returns the correct classes', () => {
-        expect(instance.classes).toEqual('carbon-profile foo');
+        instance.setProps({ className: 'foo' });
+        expect(instance.hasClass('foo')).toBeTruthy();
       });
 
       it('renders the large class if applied', () => {
-        instance = TestUtils.renderIntoDocument(
-          <Profile
-            className='foo'
-            name='Foo'
-            email='foo@bar.com'
-            initials='FB'
-            large
-          />
-        );
-        expect(instance.classes).toEqual('carbon-profile foo carbon-profile--large');
+        instance = TestRenderer.create(<Profile
+          name='Foo'
+          email='foo@bar.com'
+          initials='FB'
+          large
+        />);
+
+        expect(instance).toMatchSnapshot();
       });
     });
 
     describe('initials', () => {
-      it('renders the initials from the props', () => {
-        expect(instance.initials).toEqual('FB');
-      });
-
       it('calculates the initials when not provided', () => {
         instance = TestUtils.renderIntoDocument(
           <Profile
@@ -94,19 +84,19 @@ describe('PortraitContainer', () => {
 
     describe('avatar', () => {
       it('returns the portrait component', () => {
-        expect(TestUtils.isElementOfType(instance.avatar, Portrait)).toBeTruthy();
-        expect(instance.avatar.props.className).toEqual('carbon-profile__avatar');
+        expect(ProfileAvatarStyle).toBeTruthy();
       });
     });
 
-    fdescribe('text', () => {
-      const wrapper = mount(<Profile name='testName testSurname' email='john@doe.com' />);
+    describe('text', () => {
       it('renders the name', () => {
-        expect(wrapper.find(ProfileNameStyle).text()).toEqual('testName testSurname');
+        instance.setProps({ name: 'test name' });
+        expect(instance.find(ProfileNameStyle).text()).toEqual('test name');
       });
 
       it('renders the email', () => {
-        expect(wrapper.find('span[data-element="email"]').text()).toEqual('john@doe.com');
+        instance.setProps({ email: 'john@doe.com' });
+        expect(instance.find('span[data-element="email"]').text()).toEqual('john@doe.com');
       });
     });
   });
@@ -131,5 +121,14 @@ describe('PortraitContainer', () => {
         'name'
       ]);
     });
+  });
+});
+
+describe('ProfileClassicStyle', () => {
+  it('should render correct version if clssic is provided', () => {
+    const wrapper = TestRenderer.create(<ProfileClassicStyle
+      theme={ classicTheme }
+    />);
+    expect(wrapper).toMatchSnapshot();
   });
 });
