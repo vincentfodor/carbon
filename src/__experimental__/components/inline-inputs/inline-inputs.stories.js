@@ -3,8 +3,9 @@ import { storiesOf } from '@storybook/react';
 import { text } from '@storybook/addon-knobs';
 import InlineInputs from './inline-inputs.component';
 import Textbox from '../textbox';
+import Decimal from '../decimal';
 
-storiesOf('InlineInputs', module)
+storiesOf('Experimental/Inline Inputs', module)
   .addParameters({
     info: {
       propTablesExclude: [Textbox]
@@ -18,7 +19,7 @@ storiesOf('InlineInputs', module)
         label={ label }
       >
         <Textbox />
-        <Textbox />
+        <Decimal />
       </InlineInputs>
     );
   }, {
