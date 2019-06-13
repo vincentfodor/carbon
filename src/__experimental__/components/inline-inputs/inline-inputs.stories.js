@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { text } from '@storybook/addon-knobs';
-import InlineInputs from './inline-inputs';
+import InlineInputs from './inline-inputs.component';
 import Textbox from '../textbox';
 
 storiesOf('InlineInputs', module)
