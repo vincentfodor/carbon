@@ -5,9 +5,8 @@ import TestRenderer from 'react-test-renderer';
 import Profile from './profile.component';
 import { elementsTagTest, rootTagTest } from '../../utils/helpers/tags/tags-specs';
 import Browser from '../../utils/helpers/browser';
-import { ProfileNameStyle, ProfileAvatarStyle } from './profile.style';
+import { ProfileNameStyle, ProfileAvatarStyle, ProfileStyle } from './profile.style';
 import 'jest-styled-components';
-import ProfileClassicStyle from './profile-classic.style';
 import classicTheme from '../../style/themes/classic';
 
 
@@ -124,7 +123,7 @@ describe('PortraitContainer', () => {
 
 describe('ProfileClassicStyle', () => {
   it('should render correct version if clssic is provided', () => {
-    const wrapper = TestRenderer.create(<ProfileClassicStyle
+    const wrapper = TestRenderer.create(<ProfileStyle
       theme={ classicTheme }
     />);
     expect(wrapper).toMatchSnapshot();
