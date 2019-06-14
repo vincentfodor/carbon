@@ -5,7 +5,7 @@ import TestRenderer from 'react-test-renderer';
 import Profile from './profile.component';
 import { elementsTagTest, rootTagTest } from '../../utils/helpers/tags/tags-specs';
 import Browser from '../../utils/helpers/browser';
-import { ProfileNameStyle, ProfileAvatarStyle, ProfileStyle } from './profile.style';
+import { ProfileNameStyle, ProfileStyle } from './profile.style';
 import 'jest-styled-components';
 import classicTheme from '../../style/themes/classic';
 
