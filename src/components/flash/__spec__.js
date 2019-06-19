@@ -409,7 +409,7 @@ describe('Flash', () => {
         flashInfo.setProps({ open: true });
         flashInfo.find(Portal).find('.carbon-flash__close.icon-close').simulate('click');
         jest.runTimersToTime(2000);
-        expect(flashInfo.html()).toEqual(null);
+        expect(flashInfo.props().open).toEqual(false);
       });
     });
 
