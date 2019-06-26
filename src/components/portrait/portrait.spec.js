@@ -2,7 +2,6 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { shallow } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
-
 import classicTheme from '../../style/themes/classic';
 import mediumTheme from '../../style/themes/medium';
 import Browser from '../../utils/helpers/browser';
@@ -265,17 +264,25 @@ describe('PortraitComponent', () => {
       expect(wrapper.contains(styledPortraitInitials)).toEqual(false);
     });
 
+    it('can render the DLS theme', () => {
+      spyOn(console, 'error');
+      const props = {
+        size: 'medium', initials: 'AB', darkBackground: false, theme: mediumTheme
+      };
+      renderDLS(<StyledPortraitInitials { ...props } />);
+      props.darkBackground = true;
+      renderDLS(<StyledPortraitInitials { ...props } />);
+      expect(console.error).toHaveBeenCalledTimes(0); // eslint-disable-line no-console
+    });
+
     it('can render the Classic theme', () => {
       spyOn(console, 'error');
-      renderClassic(
-        <StyledPortraitInitials
-          size='medium'
-          initials='AB'
-          darkBackground={ false }
-          alt=''
-          theme={ classicTheme }
-        />
-      );
+      const props = {
+        size: 'medium', initials: 'AB', darkBackground: false, theme: classicTheme
+      };
+      renderClassic(<StyledPortraitInitials { ...props } />);
+      props.darkBackground = true;
+      renderClassic(<StyledPortraitInitials { ...props } />);
       expect(console.error).toHaveBeenCalledTimes(0); // eslint-disable-line no-console
     });
   });

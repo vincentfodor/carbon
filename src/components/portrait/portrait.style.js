@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-
 import BaseTheme from '../../style/themes/base';
 import Icon from '../icon';
 import PortraitGravatar from './portrait-gravatar.component';
@@ -109,18 +108,34 @@ function stylingForIcon({ size, theme, darkBackground }) {
   `;
 }
 
+function colorsForInitials(theme, darkBackground) {
+  if (isClassic(theme)) {
+    return {
+      textColor: (darkBackground ? '#FFFFFF' : '#636872'),
+      bgColor: (darkBackground ? '#8A8E95' : '#D8D9DC')
+    };
+  }
+
+  return {
+    textColor: (darkBackground ? theme.portrait.background : theme.portrait.initials),
+    bgColor: (darkBackground ? theme.portrait.initials : theme.portrait.background)
+  };
+}
+
 
 export const StyledPortraitInitials = styled(
   ({
     className, theme, initials, size, darkBackground
   }) => {
     const params = (isClassic(theme) ? sizeParamsClassic[size] : sizeParams[size]);
+    const { textColor, bgColor } = colorsForInitials(theme, darkBackground);
     return (
       <PortraitInitials
         className={ className }
         initials={ initials }
         dimensions={ params.dimensions }
-        darkBackground={ darkBackground }
+        textColor={ textColor }
+        bgColor={ bgColor }
       />
     );
   }
