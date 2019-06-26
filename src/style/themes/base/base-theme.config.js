@@ -60,8 +60,29 @@ export default (palette) => {
       background: palette.slateTint(90)
     },
 
+    table: {
+      primary: palette.slateTint(95),
+      secondary: palette.slateTint(80),
+      tertiary: palette.slateTint(10),
+      header: palette.slateTint(20),
+      hover: palette.slateTint(90),
+      selected: palette.slateTint(85),
+      zebra: palette.slateTint(98)
+    },
+
+    pager: {
+      active: 'rgba(0,0,0,0.74)',
+      disabled: 'rgba(0,0,0,0.55)',
+      hover: 'rgba(0,0,0,0.90)'
+    },
+
     icon: {
       focus: palette.slateTint(20)
+    },
+
+    portrait: {
+      border: palette.slateTint(50),
+      background: palette.slateTint(95)
     },
 
     shadows: {
