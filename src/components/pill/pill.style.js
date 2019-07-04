@@ -21,7 +21,7 @@ const setTheme = (theme) => {
   }
 };
 
-const isIE = '-ms-scroll-limit' in document.documentElement.style 
+const isIE = '-ms-scroll-limit' in document.documentElement.style
           && '-ms-ime-align' in document.documentElement.style;
 
 const PillStyle = styled.span`
@@ -94,7 +94,7 @@ const PillStyle = styled.span`
             outline: none;
             box-shadow: 0 0 0 3px ${styleSet.boxShadow};
             background-color: ${styleSet[variety].buttonFocus};
-            ${!isIE && css `
+            ${!isIE && css`
               color: ${(variety === 'warning') ? colors.black : styleSet.hoverColor};
             `}
           }
