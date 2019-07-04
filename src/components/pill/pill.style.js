@@ -21,6 +21,9 @@ const setTheme = (theme) => {
   }
 };
 
+const isIE = '-ms-scroll-limit' in document.documentElement.style 
+          && '-ms-ime-align' in document.documentElement.style;
+
 const PillStyle = styled.span`
  ${({
     colorVariant, theme, inFill, isDeletable, pillRole
@@ -49,10 +52,6 @@ const PillStyle = styled.span`
       ${inFill && css`
         background-color: ${styleSet[variety].color};
         color: ${(variety === 'warning') ? colors.black : colors.white};
-
-        .carbon-icon.icon-cross {
-          color: ${(variety === 'warning') ? colors.black : colors.white};
-        }
       `}
 
       ${!isClassic(theme, colorVariant) && !isDeletable && css`
@@ -84,32 +83,33 @@ const PillStyle = styled.span`
             background-color: transparent;
             color: ${colors.black};
           `}
-
-          &:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px ${styleSet.boxShadow};
-            background-color: ${styleSet[variety].buttonFocus};
-            color: ${(variety === 'warning') ? colors.black : styleSet.hoverColor} !important;
-          }
-
+        
           &:hover {
             background-color: ${styleSet[variety].buttonFocus};
             color: ${(variety === 'warning') ? colors.black : styleSet.hoverColor};
             cursor: pointer;
           }
- 
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px ${styleSet.boxShadow};
+            background-color: ${styleSet[variety].buttonFocus};
+            ${!isIE && css `
+              color: ${(variety === 'warning') ? colors.black : styleSet.hoverColor};
+            `}
+          }
+
           .carbon-icon {
             font-size: 12px;
             padding: 0 4px;
 
-            @supports (-ms-ime-align: auto) {
-              color: ${colors.black};
-            }
+            ${!inFill && css`
+              &:hover,
+              &:focus {
+                color: ${(variety === 'warning') ? colors.black : styleSet.hoverColor};
+              }
+            `}
 
-            &:hover, 
-            &:focus {
-              color: ${(variety === 'warning') ? colors.black : styleSet.hoverColor};
-            }
             &:before {
               font-size: 12px;
             }
