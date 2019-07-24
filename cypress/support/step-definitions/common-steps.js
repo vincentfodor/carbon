@@ -55,7 +55,7 @@ When('I select {word} to {string}', (propertyName, selection) => {
 });
 
 When('I open component preview', () => {
-  commonButtonPreview().click();
+  commonButtonPreview().click({ force: true });
 });
 
 Then('component title on preview is {string}', (title) => {

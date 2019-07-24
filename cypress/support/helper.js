@@ -22,8 +22,8 @@ export function visitComponentUrl(component, suffix = 'default', iFrameOnly = fa
     if (!iFrameOnly) {
       knobsTab().click();
     }
-  } else {
-    cy.reload();
+  } else if (!iFrameOnly) {
+    cy.get('button').contains('Reset').click();
   }
 }
 
