@@ -3,6 +3,12 @@ import {
 } from '../locators';
 import { DEBUG_FLAG } from '.';
 
+let FIRST_TEST_FLAG = true;
+
+afterEach(() => {
+  FIRST_TEST_FLAG = false;
+});
+
 function prepareUrl(component, suffix, iFrameOnly) {
   let url = Cypress.config().baseUrl;
   // eslint-disable-next-line no-unused-expressions
@@ -11,8 +17,14 @@ function prepareUrl(component, suffix, iFrameOnly) {
 }
 
 export function visitComponentUrl(component, suffix = 'default', iFrameOnly = false) {
-  cy.visit(prepareUrl(component, suffix, iFrameOnly));
-  if (!iFrameOnly) knobsTab().click();
+  if (FIRST_TEST_FLAG) {
+    cy.visit(prepareUrl(component, suffix, iFrameOnly));
+    if (!iFrameOnly) {
+      knobsTab().click();
+    }
+  } else {
+    cy.reload();
+  }
 }
 
 export function clickActionsTab(iFrameOnly = false) {
