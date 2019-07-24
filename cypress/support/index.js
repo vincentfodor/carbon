@@ -52,6 +52,18 @@ function getItem(selector, counter) {
 
 Cypress.Commands.add('iFrame', (selector) => { getItem(selector, 40); });
 
+let FIRST_TEST = true;
 before(() => {
+  FIRST_TEST = true;
   cy.wait(1000, { log: DEBUG_FLAG });
+});
+afterEach(() => {
+  FIRST_TEST = false;
+});
+
+Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
+  if (FIRST_TEST === true) {
+    return originalFn(url, options);
+  }
+  return cy.reload();
 });
