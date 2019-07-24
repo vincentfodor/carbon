@@ -1,5 +1,5 @@
 import {
-  knobsTab, actionsTab, clearButton, accessibilityTab,
+  knobsTab, actionsTab, clearButton, accessibilityTab, resetButton,
 } from '../locators';
 import { DEBUG_FLAG } from '.';
 
@@ -23,7 +23,7 @@ export function visitComponentUrl(component, suffix = 'default', iFrameOnly = fa
       knobsTab().click();
     }
   } else if (!iFrameOnly) {
-    cy.get('button').contains('Reset').click();
+    resetButton().click();
   }
 }
 

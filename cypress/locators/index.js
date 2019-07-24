@@ -6,6 +6,7 @@ import {
 
 // actions locators
 export const clearButton = () => cy.get(FORM).find('button').contains('Clear');
+export const resetButton = () => cy.get(FORM).find('button').contains('Reset');
 
 // accessibility locators
 // this timeout is only for docker accessibility tests
