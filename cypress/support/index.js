@@ -28,7 +28,7 @@ export const DEBUG_FLAG = false;
 // })
 
 before(() => {
-  cy.setMaxListeners(0);
+  Cypress.setMaxListeners(0);
   cy.wait(1000, { log: DEBUG_FLAG });
 });
 
