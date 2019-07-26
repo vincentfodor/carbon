@@ -56,4 +56,4 @@ function getItem(selector, counter) {
 
 Cypress.Commands.add('iFrame', (selector) => { getItem(selector, 40); });
 
-Cypress.Screenshot.defaults({ screenshotOnRunFailure: false });
+Cypress.Screenshot.defaults({ screenshotOnRunFailure: DEBUG_FLAG });
