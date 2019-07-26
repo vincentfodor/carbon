@@ -26,9 +26,8 @@ export const DEBUG_FLAG = false;
 //     cy.server();
 //     cy.route('/countries*', {});
 // })
-
+Cypress.setMaxListeners(100);
 before(() => {
-  Cypress.setMaxListeners(0);
   cy.wait(1000, { log: DEBUG_FLAG });
 });
 
