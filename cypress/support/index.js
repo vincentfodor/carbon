@@ -27,6 +27,10 @@ export const DEBUG_FLAG = false;
 //     cy.route('/countries*', {});
 // })
 
+before(() => {
+  cy.wait(1000, { log: DEBUG_FLAG });
+});
+
 /* returning false here prevents Cypress from failing the test */
 Cypress.on('uncaught:exception', (err, runnable) => false);
 
@@ -52,6 +56,4 @@ function getItem(selector, counter) {
 
 Cypress.Commands.add('iFrame', (selector) => { getItem(selector, 40); });
 
-before(() => {
-  cy.wait(1000, { log: DEBUG_FLAG });
-});
+Cypress.Screenshot.defaults({ screenshotOnRunFailure: false });
