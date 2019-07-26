@@ -1,6 +1,7 @@
 {
   "baseUrl": "http://localhost:9001/",
   "blacklistHosts": ["www.google-analytics.com", "sockjs*", "countries*"],
+  "chromeWebSecurity": false,
   "env": { "TAGS": "not @ignore" },
   "failOnStatusCode": false,
   "ignoreTestFiles": ["**/examples/*", "**/!(*.spec).js"],
