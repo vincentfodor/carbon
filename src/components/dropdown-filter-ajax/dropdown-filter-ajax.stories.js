@@ -27,7 +27,7 @@ const onChange = (evt) => {
     visibleValue: evt.target.visibleValue,
     value: evt.target.visibleValue
   });
-  action('change')(evt);
+//  action(change')(evt);
 };
 
 const defaultKnobs = () => {

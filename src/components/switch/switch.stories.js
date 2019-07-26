@@ -15,7 +15,7 @@ const store = new Store({
 
 const handleChange = (event) => {
   store.set({ value: !store.get('value') });
-  action('click')(event);
+//  action(click')(event);
 };
 
 const numberConfig = {

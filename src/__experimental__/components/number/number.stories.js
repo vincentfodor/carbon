@@ -19,7 +19,7 @@ const store = new Store(
 );
 
 const setValue = (ev) => {
-  action('onChange')(ev);
+//  action(onChange')(ev);
   store.set({ value: ev.target.value });
 };
 
@@ -35,8 +35,8 @@ storiesOf('Experimental/Number Input', module)
         { ...getCommonTextboxStoryProps() }
         value={ store.get('value') }
         onChange={ setValue }
-        onKeyDown={ onKeyDownEnabled ? action('onKeyDown') : undefined }
-        onChangeDeferred={ onChangeDeferredEnabled ? action('onChangeDeferred') : undefined }
+//        onKeyDown={ onKeyDownEnabled ? action(onKeyDown') : undefined }
+//        onChangeDeferred={ onChangeDeferredEnabled ? action(onChangeDeferred') : undefined }
         deferTimeout={ deferTimeout }
       />
     );

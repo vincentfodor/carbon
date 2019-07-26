@@ -37,7 +37,7 @@ const handleDrag = (originalIndex, newIndex) => {
   dndData.splice(newIndex, 0, sortedItem[0]);
 
   store.set({ dndData });
-  action('drag')();
+//  action(drag')();
 };
 
 const BuildRows = props => (

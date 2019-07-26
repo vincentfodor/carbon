@@ -13,7 +13,7 @@ const store = new Store({
   value: '0'
 });
 const handleChange = (event) => {
-  action('changed')(event);
+//  action(changed')(event);
 
   store.set({ value: event.target.value });
 };

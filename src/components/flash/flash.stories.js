@@ -22,12 +22,12 @@ const store = new Store({
 
 const handleClick = () => {
   store.set({ open: false });
-  action('cancel')();
+//  action(cancel')();
 };
 
 const openHandler = () => {
   store.set({ open: true });
-  action('open')();
+//  action(open')();
 };
 
 storiesOf('Flash', module)

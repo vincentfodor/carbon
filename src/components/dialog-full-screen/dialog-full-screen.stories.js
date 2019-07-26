@@ -14,16 +14,16 @@ const store = new Store({
 
 const handleCancel = () => {
   store.set({ open: false });
-  action('cancel')();
+//  action(cancel')();
 };
 
 const handleOpen = () => {
   store.set({ open: true });
-  action('open')();
+//  action(open')();
 };
 
 const handleClick = (evt) => {
-  action('click')(evt);
+//  action(click')(evt);
 };
 
 storiesOf('Dialog Full Screen', module)

@@ -49,7 +49,7 @@ storiesOf('Pill', module)
         <Pill
           as={ as }
           fill={ fill }
-          onDelete={ onDelete ? action('delete') : null }
+//          onDelete={ onDelete ? action(delete') : null }
         >
           {children}
         </Pill>
@@ -71,7 +71,7 @@ storiesOf('Pill', module)
       <Pill
         colorVariant={ colorVariant }
         fill={ fill }
-        onDelete={ onDelete ? action('delete') : null }
+//        onDelete={ onDelete ? action(delete') : null }
         pillRole={ pillRole }
       >
         { children }

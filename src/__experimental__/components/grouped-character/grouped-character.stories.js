@@ -14,7 +14,7 @@ const groupedCharacterStore = new Store({
 
 const onChange = (ev) => {
   groupedCharacterStore.set({ value: ev.target.value });
-  action('change')(ev);
+//  action(change')(ev);
 };
 
 storiesOf('Experimental/GroupedCharacter', module)

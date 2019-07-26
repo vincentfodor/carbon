@@ -25,7 +25,7 @@ const commonKnobs = (store) => {
     infoMessage: text('infoMessage', ''),
     onChange: (ev) => {
       store.set({ value: ev.target.value });
-      action('change')(ev);
+//      action(change')(ev);
     },
     placeholder: text('placeholder', ''),
     readOnly: boolean('readOnly', false),

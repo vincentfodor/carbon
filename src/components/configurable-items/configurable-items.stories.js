@@ -39,22 +39,22 @@ const handleDrag = (draggedIndex, hoveredIndex) => {
   configurableItemsData[hoveredIndex] = draggedItem;
 
   store.set('configurableItemsData', configurableItemsData);
-  action('dragged')();
+//  action(dragged')();
 };
 const handleChange = (rowIndex) => {
   const configurableItemsData = store.get('configurableItemsData');
   configurableItemsData[rowIndex].enabled = !configurableItemsData[rowIndex].enabled;
   store.set({ configurableItemsData });
-  action('changed')();
+//  action(changed')();
 };
 const handleSave = (event) => {
   event.persist();
 
-  action('saved')();
+//  action(saved')();
 };
 const handleReset = () => {
   store.set({ configurableItemsData: cloneDeep(defaultConfigurableItemsData) });
-  action('reset')();
+//  action(reset')();
 };
 const rows = data => data.map((column, rowIndex) => {
   return (
@@ -79,7 +79,7 @@ storiesOf('Configurable Items', module)
     return (
       <ConfigurableItems
         onDrag={ handleDrag }
-        onCancel={ action('canceled') }
+//        onCancel={ action(canceled') }
         onReset={ handleReset }
         onSave={ handleSave }
       >

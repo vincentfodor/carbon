@@ -37,7 +37,7 @@ const getKnobs = (isClassic) => {
     buttonType,
     children: text('children', 'Example Button'),
     disabled: boolean('disabled', Button.defaultProps.disabled),
-    onClick: ev => action('click')(ev),
+//    onClick: ev => action(click')(ev),
     size,
     subtext: (size === OptionsHelper.sizesRestricted[2]) ? text('subtext', Button.defaultProps.subtext) : undefined,
     ...classicProps,

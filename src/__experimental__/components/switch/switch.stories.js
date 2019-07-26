@@ -57,7 +57,7 @@ storiesOf('Experimental/Switch', module)
 
 function handleChange(ev) {
   formStore.set({ checked: ev.target.checked });
-  action('checked')(ev.target.checked);
+//  action(checked')(ev.target.checked);
 }
 
 function commonKnobs() {

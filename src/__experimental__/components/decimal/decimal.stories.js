@@ -16,7 +16,7 @@ const store = new Store({
 });
 
 const setValue = (ev) => {
-  action('onChange')(ev);
+//  action(onChange')(ev);
   store.set({ value: ev.target.value });
 };
 

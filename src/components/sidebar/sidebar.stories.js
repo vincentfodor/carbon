@@ -14,7 +14,7 @@ const store = new Store({
 
 const onCancel = () => {
   store.set({ open: false });
-  action('cancel')();
+//  action(cancel')();
 };
 
 const openSidebar = () => {

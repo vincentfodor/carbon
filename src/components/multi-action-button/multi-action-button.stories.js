@@ -35,7 +35,7 @@ const getKnobs = (isClassic) => {
     as,
     buttonType,
     disabled: boolean('disabled', Button.defaultProps.disabled),
-    onClick: ev => action('click')(ev),
+//    onClick: ev => action(click')(ev),
     size,
     subtext,
     textContent: text('text', 'Example Multi Action Button')

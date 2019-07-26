@@ -15,21 +15,21 @@ const store = new Store({
 
 const onEdit = () => {
   store.set({ editing: true });
-  action('edit')();
+//  action(edit')();
 };
 
 const onCancel = () => {
   store.set({ editing: false });
-  action('cancel')();
+//  action(cancel')();
 };
 
 const onDelete = () => {
   store.set({ editing: false });
-  action('delete')();
+//  action(delete')();
 };
 
 const afterFormValidation = () => {
-  action('afterFormValidation')();
+//  action(afterFormValidation')();
 };
 
 storiesOf('ShowEditPod', module)

@@ -22,7 +22,7 @@ storiesOf('Button Toggle', module)
     const grouped = boolean('grouped', false);
 
     const onChange = (ev) => {
-      action('onChange')(ev);
+//      action(onChange')(ev);
     };
 
     return (

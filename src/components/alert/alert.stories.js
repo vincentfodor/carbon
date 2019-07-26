@@ -14,11 +14,11 @@ const store = new Store({
 
 const handleCancel = () => {
   store.set({ open: false });
-  action('cancel')();
+//  action(cancel')();
 };
 const handleOpen = () => {
   store.set({ open: true });
-  action('open')();
+//  action(open')();
 };
 
 storiesOf('Alert', module)

@@ -14,17 +14,17 @@ const store = new Store({
 });
 
 const handleSlide = (ev) => {
-  action('slide')(ev);
+//  action(slide')(ev);
   store.set({ slideIndex: (ev.target.name || 0) });
 };
 
 const handleOpen = () => {
-  action('open')();
+//  action(open')();
   store.set({ open: true });
 };
 
 const handleCancel = () => {
-  action('cancel')();
+//  action(cancel')();
   store.set({ open: false });
 };
 

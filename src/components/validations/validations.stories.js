@@ -213,10 +213,10 @@ storiesOf('Validations', module)
 
 function handleSubmit(ev) {
   ev.preventDefault();
-  action('submit')();
+//  action(submit')();
 }
 
 function handleChange(ev) {
-  action('change')();
+//  action(change')();
   buttonToggleGroupStore.set({ value: ev.target.value });
 }

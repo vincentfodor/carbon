@@ -29,7 +29,7 @@ storiesOf('Toast', module)
     const onDismiss = boolean('onDismiss', true);
 
     const handleChange = () => {
-      action('clicked')();
+//      action(clicked')();
     };
 
     return (
@@ -47,7 +47,7 @@ storiesOf('Toast', module)
     const children = text('children', 'Talkie\'s the name, toasting\'s the game. Anyone like any toast?');
     const open = boolean('open', true);
     const onDismiss = boolean('onDismiss', true);
-    const onDismissClick = onDismiss ? (evt) => { action('click')(evt); } : undefined;
+//    const onDismissClick = onDismiss ? (evt) => { action(click')(evt); } : undefined;
 
     return (
       <StyledToastStory

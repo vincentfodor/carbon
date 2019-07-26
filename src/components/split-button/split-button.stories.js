@@ -37,7 +37,7 @@ const getKnobs = (isClassic) => {
     dataElement: text('data-element'),
     dataRole: text('data-role'),
     disabled: boolean('disabled', Button.defaultProps.disabled),
-    onClick: ev => action('click')(ev),
+//    onClick: ev => action(click')(ev),
     size,
     align: select('align', OptionsHelper.alignBinary, SplitButton.defaultProps.align),
     textContent: text('text', 'Example Split Button'),

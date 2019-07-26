@@ -14,7 +14,7 @@ const onChange = (e) => {
   store.set({
     selectedColor: e.target.value
   });
-  action('select')();
+//  action(select')();
 };
 
 storiesOf('Experimental/Simple Color Picker', module)

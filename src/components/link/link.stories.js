@@ -42,7 +42,7 @@ storiesOf('Link', module)
         tooltipMessage={ tooltipMessage }
         tooltipPosition={ tooltipPosition }
         tooltipAlign={ tooltipAlign }
-        onClick={ action('click') }
+//        onClick={ action(click') }
       >
         {children}
       </Link>

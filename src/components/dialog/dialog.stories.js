@@ -21,16 +21,16 @@ const store = new Store({
 
 const handleCancel = (evt) => {
   store.set({ open: false });
-  action('cancel')(evt);
+//  action(cancel')(evt);
 };
 
 const handleOpen = (evt) => {
   store.set({ open: true });
-  action('open')(evt);
+//  action(open')(evt);
 };
 
 const handleClick = (evt) => {
-  action('click')(evt);
+//  action(click')(evt);
 };
 
 storiesOf('Dialog', module)

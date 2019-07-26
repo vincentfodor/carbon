@@ -12,15 +12,15 @@ const store = new Store({
   open: false
 });
 const handleCancel = () => {
-  action('cancel')();
+//  action(cancel')();
   store.set({ open: false });
 };
 const handleOpen = () => {
-  action('open')();
+//  action(open')();
   store.set({ open: true });
 };
 const handleConfirm = () => {
-  action('confirm')();
+//  action(confirm')();
   store.set({ open: false });
 };
 

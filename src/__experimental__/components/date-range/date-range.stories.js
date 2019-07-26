@@ -11,7 +11,7 @@ const store = new Store({
 });
 const handleChange = (newDate) => {
   store.set({ value: newDate });
-  action('changed')(newDate);
+//  action(changed')(newDate);
 };
 
 storiesOf('Experimental/Date Range', module)

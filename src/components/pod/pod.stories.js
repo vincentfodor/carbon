@@ -34,7 +34,7 @@ storiesOf('Pod', module)
         alignTitle={ alignTitle }
         description={ description }
         footer={ footer }
-        onEdit={ onEdit ? action('edit') : undefined }
+//        onEdit={ onEdit ? action(edit') : undefined }
         editContentFullWidth={ editContentFullWidth }
         displayEditButtonOnHover={ displayEditButtonOnHover }
         triggerEditOnContent={ triggerEditOnContent }

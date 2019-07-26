@@ -20,7 +20,7 @@ const store = new Store({
 
 const handleChange = (evt) => {
   store.set({ value: evt.target.value });
-  action('change')(evt);
+//  action(change')(evt);
 };
 
 storiesOf('Dropdown', module)

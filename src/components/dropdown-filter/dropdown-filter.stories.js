@@ -21,7 +21,7 @@ const store = new Store({
 // Shared Props
 const onChange = (evt) => {
   store.set({ value: evt.target.value });
-  action('change')(evt);
+//  action(change')(evt);
 };
 
 const defaultKnobs = () => {
