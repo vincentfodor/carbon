@@ -2,6 +2,6 @@
 set -e
 
 echo 'Build Docker Image'
-docker build --rm -t carbon_cypress -f Dockerfile-cypress .
+docker build --rm -t carbon_cypress -f Dockerfile-cypress --memory-swap -1 .
 
 echo 'Setup complete'
