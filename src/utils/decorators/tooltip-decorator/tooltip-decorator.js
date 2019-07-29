@@ -125,30 +125,9 @@ const TooltipDecorator = (ComposedComponent) => {
      */
     _hideTooltipTimeout = null;
 
-    /**
-     * Cache the shifts calculations (used for positioning)
-     *
-     * @property _memoizedShifts
-     */
-    _memoizedShifts = null;
-
     componentDidMount() {
       if (super.componentDidMount) super.componentDidMount();
-      if (this.props.tooltipVisible) this.positionTooltip();
-    }
-
-    /**
-     * @method componentWillUpdate
-     * @return {Void}
-     */
-    componentWillUpdate(nextProps, nextState) {
-      if (super.componentWillUpdate) { super.componentWillUpdate(nextProps, nextState); }
-
-      if (nextProps.tooltipMessage !== this.props.tooltipMessage
-          || nextProps.tooltipPosition !== this.props.tooltipPosition
-          || nextProps.tooltipAlign !== this.props.tooltipAlign) {
-        this._memoizedShifts = null;
-      }
+      if (this.props.tooltipVisible) this.positionTooltipIfVisible();
     }
 
     /**
@@ -158,8 +137,8 @@ const TooltipDecorator = (ComposedComponent) => {
     componentDidUpdate(prevProps) {
       if (super.componentDidUpdate) { super.componentDidUpdate(prevProps); }
 
-      if (this.props.tooltipMessage && !this._memoizedShifts && this.isVisible()) {
-        this.positionTooltip();
+      if (this.props.tooltipMessage && this.isVisible()) {
+        this.positionTooltipIfVisible();
       }
     }
 
@@ -203,7 +182,7 @@ const TooltipDecorator = (ComposedComponent) => {
 
       this._showTooltipTimeout = setTimeout(() => {
         this.setState({ isVisible: true });
-        this.positionTooltip();
+        this.positionTooltipIfVisible();
       }, 100);
     };
 
@@ -241,14 +220,12 @@ const TooltipDecorator = (ComposedComponent) => {
       return ReactDOM.findDOMNode(this._tooltip); // eslint-disable-line react/no-find-dom-node
     }
 
-    realignOffscreenTooltip = (shifts, tooltipWidth) => {
+    realignOffscreenTooltip = (horizontalPosition, tooltipWidth) => {
       if (this.props.tooltipAlign === 'right' || this.state.tooltipAlign === 'right') return;
 
       const position = this.props.tooltipPosition || 'top';
-      const alignment = this.props.tooltipAlign || 'center';
 
       if (position === 'top' || position === 'bottom') {
-        const horizontalPosition = shifts[`vertical${startCase(alignment)}`];
         if (window.innerWidth < (horizontalPosition + tooltipWidth)) {
           this.setState({ tooltipAlign: 'right' });
         }
@@ -263,22 +240,27 @@ const TooltipDecorator = (ComposedComponent) => {
      * @param {Object} target
      * @return {Void}
      */
-    positionTooltip = () => {
-      if (this.isVisible()) {
-        const tooltip = this.getTooltip(),
-            target = this.getTarget();
-        if (!tooltip || !target) {
-          // Can't find the tooltip or target so hide
-          if (this.state.isVisible) this.setState({ isVisible: false });
-          return;
-        }
-
-        const alignment = this.state.tooltipAlign || this.props.tooltipAlign || 'center';
-        const position = this.props.tooltipPosition || 'top';
-
-        positionTooltip(tooltip, target, position, alignment);
+    positionTooltipIfVisible = () => {
+      if (!this.isVisible()) {
+        return;
       }
-    };
+
+      const tooltip = this.getTooltip();
+      const target = this.getTarget();
+
+      if (!tooltip || !target) {
+        // Can't find the tooltip or target so hide
+        if (this.state.isVisible) this.setState({ isVisible: false });
+        return;
+      }
+
+      const alignment = this.state.tooltipAlign || this.props.tooltipAlign || 'center';
+      const position = this.props.tooltipPosition || 'top';
+
+      const { x } = positionTooltip(tooltip, target, position, alignment);
+
+      this.realignOffscreenTooltip(x, tooltip.offsetWidth);
+    }
 
     /**
      * Additional Props for decorated component
