@@ -11,8 +11,9 @@ const eventEmitter = new events.EventEmitter();
 
 afterEach(() => {
   FIRST_TEST_FLAG = false;
-  eventEmitter.removeAllListeners('exitEarlyWithErr');
-  eventEmitter.removeAllListeners('preprocessor:close');
+  // eventEmitter.removeAllListeners('exitEarlyWithErr');
+  // eventEmitter.removeAllListeners('preprocessor:close');
+  eventEmitter.removeAllListeners('EventEmitter');
 });
 
 function prepareUrl(component, suffix, iFrameOnly) {
