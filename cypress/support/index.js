@@ -37,7 +37,7 @@ before(() => {
 
 afterEach(() => {
   eventEmitter.removeAllListeners('exitEarlyWithErr');
-  eventEmitter.removeAllListeners(' preprocessor:close');
+  eventEmitter.removeAllListeners('preprocessor:close');
 });
 
 /* returning false here prevents Cypress from failing the test */
