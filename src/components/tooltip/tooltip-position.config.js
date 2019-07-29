@@ -1,5 +1,5 @@
 import { startCase } from 'lodash';
-import { styleElement, append } from '../../utils/ether';
+import { styleElement } from '../../utils/ether';
 
 /**
  * Calculates position for tooltip.
@@ -41,6 +41,21 @@ function calculatePosition(tooltip, target) {
 }
 
 /**
+ * Update a CSS position attribute of the tooltip,
+ * if the new value is different from the existing value.
+ *
+ * @param {Object} tooltip
+ * @param {string} attribute
+ * @param {number} pixels
+ */
+function setPositionAttributeIfChanged(tooltip, attribute, pixels) {
+  const pixelsString = `${Math.round(pixels)}px`;
+  if (tooltip.style[attribute] !== pixelsString) {
+    styleElement(tooltip, attribute, pixelsString);
+  }
+}
+
+/**
  * Positions tooltip relative to target
  *
  * @method positionTooltip
@@ -78,8 +93,8 @@ export default function positionTooltip(tooltip, target, position, alignment) {
       y = shifts[`side${startCase(alignment)}`];
   }
 
-  styleElement(tooltip, 'left', append(x, 'px'));
-  styleElement(tooltip, 'top', append(y, 'px'));
+  setPositionAttributeIfChanged(tooltip, 'left', x);
+  setPositionAttributeIfChanged(tooltip, 'top', y);
 
   return { x, y };
 }
