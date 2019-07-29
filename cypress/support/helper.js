@@ -13,7 +13,8 @@ afterEach(() => {
   FIRST_TEST_FLAG = false;
   // eventEmitter.removeAllListeners('exitEarlyWithErr');
   // eventEmitter.removeAllListeners('preprocessor:close');
-  eventEmitter.removeAllListeners('EventEmitter');
+  eventEmitter.removeAllListeners();
+  eventEmitter.setMaxListeners(100);
 });
 
 function prepareUrl(component, suffix, iFrameOnly) {
