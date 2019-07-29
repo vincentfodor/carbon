@@ -26,8 +26,9 @@ export const DEBUG_FLAG = false;
 //     cy.server();
 //     cy.route('/countries*', {});
 // })
-this.setMaxListeners(100);
+
 before(() => {
+  cy.setMaxListeners(100);
   cy.wait(1000, { log: DEBUG_FLAG });
 });
 
