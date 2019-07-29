@@ -27,9 +27,17 @@ export const DEBUG_FLAG = false;
 //     cy.route('/countries*', {});
 // })
 
+const events = require('events');
+
+const eventEmitter = new events.EventEmitter();
+
 before(() => {
-  cy.setMaxListeners(100);
   cy.wait(1000, { log: DEBUG_FLAG });
+});
+
+afterEach(() => {
+  eventEmitter.removeAllListeners('exitEarlyWithErr');
+  eventEmitter.removeAllListeners(' preprocessor:close');
 });
 
 /* returning false here prevents Cypress from failing the test */
