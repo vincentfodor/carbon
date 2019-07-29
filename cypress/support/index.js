@@ -26,9 +26,10 @@ export const DEBUG_FLAG = false;
 //     cy.server();
 //     cy.route('/countries*', {});
 // })
-Cypress.setMaxListeners(100);
+this.setMaxListeners(100);
 before(() => {
   cy.wait(1000, { log: DEBUG_FLAG });
+  this.setMaxListeners(100);
 });
 
 /* returning false here prevents Cypress from failing the test */
