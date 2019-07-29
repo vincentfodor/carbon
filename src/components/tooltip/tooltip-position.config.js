@@ -1,3 +1,6 @@
+import { startCase } from 'lodash';
+import { styleElement, append } from '../../utils/ether';
+
 /**
  * Calculates position for tooltip.
  *
@@ -35,4 +38,48 @@ function calculatePosition(tooltip, target) {
   };
 
   return shifts;
+}
+
+/**
+ * Positions tooltip relative to target
+ *
+ * @method positionTooltip
+ * @param {Object} tooltip
+ * @param {Object} target
+ * @param {string} position
+ * @param {string} alignment
+ * @return {Object} New coordinates of tooltip
+ */
+export default function positionTooltip(tooltip, target, position, alignment) {
+  const shifts = calculatePosition(tooltip, target);
+
+  let x = 0;
+  let y = 0;
+
+  switch (position) {
+    case 'top':
+      x = shifts[`vertical${startCase(alignment)}`];
+      y = shifts.verticalY;
+      break;
+
+    case 'bottom':
+      x = shifts[`vertical${startCase(alignment)}`];
+      y = shifts.verticalBottomY;
+      break;
+
+    case 'left':
+      x = shifts[`${position}Horizontal`];
+      y = shifts[`side${startCase(alignment)}`];
+      break;
+
+    case 'right':
+    default:
+      x = shifts[`${position}Horizontal`];
+      y = shifts[`side${startCase(alignment)}`];
+  }
+
+  styleElement(tooltip, 'left', append(x, 'px'));
+  styleElement(tooltip, 'top', append(y, 'px'));
+
+  return { x, y };
 }

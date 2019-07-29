@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { startCase, assign } from 'lodash';
+import { assign } from 'lodash';
 import Tooltip from '../../../components/tooltip';
+import positionTooltip from '../../../components/tooltip/tooltip-position.config';
 import Portal from '../../../components/portal';
 import chainFunctions from '../../helpers/chain-functions';
-import { styleElement, append } from '../../ether';
 
 /**
  * TooltipDecorator.
@@ -273,36 +273,10 @@ const TooltipDecorator = (ComposedComponent) => {
           return;
         }
 
-        const alignment = this.state.tooltipAlign || this.props.tooltipAlign || 'center',
-            position = this.props.tooltipPosition || 'top',
-            shifts = this.calculatePosition(tooltip, target);
+        const alignment = this.state.tooltipAlign || this.props.tooltipAlign || 'center';
+        const position = this.props.tooltipPosition || 'top';
 
-        switch (position) {
-          case 'top':
-            styleElement(tooltip, 'top', append(shifts.verticalY, 'px'));
-            styleElement(tooltip, 'right', 'auto');
-            styleElement(tooltip, 'bottom', 'auto');
-            styleElement(tooltip, 'left', append(shifts[`vertical${startCase(alignment)}`], 'px'));
-            break;
-
-          case 'bottom':
-            styleElement(tooltip, 'top', append(shifts.verticalBottomY, 'px'));
-            styleElement(tooltip, 'bottom', 'auto');
-            styleElement(tooltip, 'left', append(shifts[`vertical${startCase(alignment)}`], 'px'));
-            break;
-
-          case 'left':
-            styleElement(tooltip, 'top', append(shifts[`side${startCase(alignment)}`], 'px'));
-            styleElement(tooltip, 'bottom', 'auto');
-            styleElement(tooltip, 'left', append(shifts[`${position}Horizontal`], 'px'));
-            break;
-
-          case 'right':
-          default:
-            styleElement(tooltip, 'top', append(shifts[`side${startCase(alignment)}`], 'px'));
-            styleElement(tooltip, 'bottom', 'auto');
-            styleElement(tooltip, 'left', append(shifts[`${position}Horizontal`], 'px'));
-        }
+        positionTooltip(tooltip, target, position, alignment);
       }
     };
 
