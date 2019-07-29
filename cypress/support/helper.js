@@ -5,8 +5,14 @@ import { DEBUG_FLAG } from '.';
 
 let FIRST_TEST_FLAG = true;
 
+const events = require('events');
+
+const eventEmitter = new events.EventEmitter();
+
 afterEach(() => {
   FIRST_TEST_FLAG = false;
+  eventEmitter.removeAllListeners('exitEarlyWithErr');
+  eventEmitter.removeAllListeners('preprocessor:close');
 });
 
 function prepareUrl(component, suffix, iFrameOnly) {
