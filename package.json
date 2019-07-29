@@ -117,6 +117,12 @@
     "wait-on": "^3.2.0"
   },
   "cypress-cucumber-preprocessor": {
-    "step_definitions": "cypress/support/step-definitions/"
+    "step_definitions": "cypress/support/step-definitions/",
+    "cucumberJson": {
+      "generate": false,
+      "outputFolder": "cypress/cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
   }
 }
