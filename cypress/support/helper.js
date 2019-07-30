@@ -5,13 +5,15 @@ import { DEBUG_FLAG } from '.';
 
 let FIRST_TEST_FLAG = true;
 
-// const events = require('events');
-
-// const eventEmitter = new events.EventEmitter();
+beforeEach(() => {
+  Cypress.setMaxListeners(66);
+});
 
 afterEach(() => {
   FIRST_TEST_FLAG = false;
-  // eventEmitter.removeAllListeners();
+  cy.task('log', `Cypress events >> ${Cypress.eventNames()}`);
+  cy.task('log', `Cypress listeners >> ${Cypress.listeners()}`);
+  cy.task('log', `Cypress listenerCount() >> ${Cypress.listenerCount()}`);
 });
 
 function prepareUrl(component, suffix, iFrameOnly) {

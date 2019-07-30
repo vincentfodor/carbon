@@ -11,13 +11,13 @@ Feature: Fieldset component
     Examples:
       | legend                   |
       | Sample text              |
-      | 1234567890               |
-      | áéíóú¿¡üñ                |
-      | !@#$%^*()_+-=~[];:.,?{}  |
-      | ÄÖÜßäöüß                 |
-      | <>                       |
+  #     | 1234567890               |
+  #     | áéíóú¿¡üñ                |
+  #     | !@#$%^*()_+-=~[];:.,?{}  |
+  #     | ÄÖÜßäöüß                 |
+  #     | <>                       |
 
-  @negative
-  Scenario: Set legend in Fieldset to empty
-    When I set legend to empty
-    Then legend on preview not exists
+  # @negative
+  # Scenario: Set legend in Fieldset to empty
+  #   When I set legend to empty
+  #   Then legend on preview not exists

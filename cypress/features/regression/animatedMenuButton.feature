@@ -12,32 +12,32 @@ Feature: Animated Menu Button component
     Examples:
       | label                    |
       | Sample text              |
-      | 1234567890               |
-      | áéíóú¿¡üñ                |
-      | !@#$%^*()_+-=~[];:.,?{}  |
-      | ÄÖÜßäöüß                 |
-      # @ignore because of FE-1447
-      # | <>                       |
+  #     | 1234567890               |
+  #     | áéíóú¿¡üñ                |
+  #     | !@#$%^*()_+-=~[];:.,?{}  |
+  #     | ÄÖÜßäöüß                 |
+  #     # @ignore because of FE-1447
+  #     # | <>                       |
 
-  @positive
-  Scenario Outline: Change Animated Menu Button direction to <direction>
-    When I select direction to "<direction>"
-    Then Animated Menu Button direction on preview is "<direction>"
-    Examples:
-      | direction |
-      | left      |
-      | right     |
+  # @positive
+  # Scenario Outline: Change Animated Menu Button direction to <direction>
+  #   When I select direction to "<direction>"
+  #   Then Animated Menu Button direction on preview is "<direction>"
+  #   Examples:
+  #     | direction |
+  #     | left      |
+  #     | right     |
 
-  @positive
-  Scenario Outline: Change Animated Menu Button size to <size>
-    When I select size to "<size>"
-    Then Animated Menu Button size property on preview is "<size>"
-    Examples:
-      | size         |
-      | extra-small  |
-      | small        |
-      | medium-small |
-      | medium       |
-      | medium-large |
-      | large        |
-      | extra-large  |
+  # @positive
+  # Scenario Outline: Change Animated Menu Button size to <size>
+  #   When I select size to "<size>"
+  #   Then Animated Menu Button size property on preview is "<size>"
+  #   Examples:
+  #     | size         |
+  #     | extra-small  |
+  #     | small        |
+  #     | medium-small |
+  #     | medium       |
+  #     | medium-large |
+  #     | large        |
+  #     | extra-large  |

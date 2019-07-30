@@ -9,9 +9,9 @@ Feature: App Wrapper component
     Examples:
       | children                 |
       | Sample text              |
-      | 1234567890               |
-      | áéíóú¿¡üñ                |
-      | !@#$%^*()_+-=~[];:.,?{}  |
-      | ÄÖÜßäöüß                 |
-      # @ignore because of FE-1447
-      # | <>                       |
+      # | 1234567890               |
+      # | áéíóú¿¡üñ                |
+      # | !@#$%^*()_+-=~[];:.,?{}  |
+      # | ÄÖÜßäöüß                 |
+      # # @ignore because of FE-1447
+      # # | <>                       |

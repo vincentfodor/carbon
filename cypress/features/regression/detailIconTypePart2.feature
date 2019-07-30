@@ -13,53 +13,53 @@ Feature: Detail component
       | feedback          |
       | filter            |
       | filter_new        |
-      | fit_height        |
-      | fit_width         |
-      | folder            |
-      | gift              |
-      | graph             |
-      | grid              |
-      | home              |
-      | image             |
-      | in_progress       |
-      | in_transit        |
-      | info              |
-      | individual        |
-      | key               |
-      | link              |
-      | list_view         |
-      | locked            |
-      | location          |
-      | logout            |
-      | marker            |
-      | message           |
-      | messages          |
-      | minus             |
-      | mobile            |
-      | pdf               |
-      | people            |
-      | person            |
-      | phone             |
-      | plus              |
-      | print             |
-      | progressed        |
-      | question          |
-      | refresh           |
-      | remove            |
-      | save              |
-      | search            |
-      | services          |
-      | settings          |
-      | share             |
-      | shop              |
-      | sort_down         |
-      | sort_up           |
-      | submitted         |
-      | sync              |
-      | tick              |
-      | unlocked          |
-      | upload            |
-      | uploaded          |
-      | view              |
-      | warning           |
-      | white-tick        |
+      # | fit_height        |
+      # | fit_width         |
+      # | folder            |
+      # | gift              |
+      # | graph             |
+      # | grid              |
+      # | home              |
+      # | image             |
+      # | in_progress       |
+      # | in_transit        |
+      # | info              |
+      # | individual        |
+      # | key               |
+      # | link              |
+      # | list_view         |
+      # | locked            |
+      # | location          |
+      # | logout            |
+      # | marker            |
+      # | message           |
+      # | messages          |
+      # | minus             |
+      # | mobile            |
+      # | pdf               |
+      # | people            |
+      # | person            |
+      # | phone             |
+      # | plus              |
+      # | print             |
+      # | progressed        |
+      # | question          |
+      # | refresh           |
+      # | remove            |
+      # | save              |
+      # | search            |
+      # | services          |
+      # | settings          |
+      # | share             |
+      # | shop              |
+      # | sort_down         |
+      # | sort_up           |
+      # | submitted         |
+      # | sync              |
+      # | tick              |
+      # | unlocked          |
+      # | upload            |
+      # | uploaded          |
+      # | view              |
+      # | warning           |
+      # | white-tick        |

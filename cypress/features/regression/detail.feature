@@ -12,22 +12,22 @@ Feature: Detail component
       | children                 |
       | Sample text              |
       | 1234567890               |
-      | áéíóú¿¡üñ                |
-      | !@#$%^*()_+-=~[];:.,?{}  |
-      | ÄÖÜßäöüß                 |
-      # @ignore because of FE-1447
-      # | <>                       |
+  #     | áéíóú¿¡üñ                |
+  #     | !@#$%^*()_+-=~[];:.,?{}  |
+  #     | ÄÖÜßäöüß                 |
+  #     # @ignore because of FE-1447
+  #     # | <>                       |
 
-  @positive
-  Scenario Outline: Change Detail footnote to <footnote>
-    When I set footnote to "<footnote>"
-    Then detail footnote on preview is "<footnote>"
-    Examples:
-      | footnote                 |
-      | Sample text              |
-      | 1234567890               |
-      | áéíóú¿¡üñ                |
-      | !@#$%^*()_+-=~[];:.,?{}  |
-      | ÄÖÜßäöüß                 |
-      # @ignore because of FE-1447
-      # | <>                       |
+  # @positive
+  # Scenario Outline: Change Detail footnote to <footnote>
+  #   When I set footnote to "<footnote>"
+  #   Then detail footnote on preview is "<footnote>"
+  #   Examples:
+  #     | footnote                 |
+  #     | Sample text              |
+  #     | 1234567890               |
+  #     | áéíóú¿¡üñ                |
+  #     | !@#$%^*()_+-=~[];:.,?{}  |
+  #     | ÄÖÜßäöüß                 |
+  #     # @ignore because of FE-1447
+  #     # | <>                       |

@@ -27,15 +27,16 @@ export const DEBUG_FLAG = false;
 //     cy.route('/countries*', {});
 // })
 
-Cypress.on('preprocessor:close', (err, runnable) => false);
-Cypress.on('exitEarlyWithErr', (err, runnable) => false);
+// Cypress.on('preprocessor:close', (err, runnable) => false);
+// Cypress.on('exitEarlyWithErr', (err, runnable) => false);
 
-before(() => {
-  cy.wait(1000, { log: DEBUG_FLAG });
-});
+// before(() => {
+// cy.wait(1000, { log: DEBUG_FLAG });
+// });
+
 
 /* returning false here prevents Cypress from failing the test */
-Cypress.on('uncaught:exception', (err, runnable) => false);
+// Cypress.on('uncaught:exception', (err, runnable) => false);
 
 Cypress.Commands.overwrite(
   'type',
