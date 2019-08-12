@@ -132,6 +132,8 @@ const Wrapper = (props) => {
         sortedColumn={ store.sortedColumn }
         onPageSizeChange={ size => setPageSize(size) }
         isPassiveData={ props.isPassiveData }
+        hightlightable={ props.hightlightable }
+        selectable={ props.selectable }
       />
     </State>
   );
