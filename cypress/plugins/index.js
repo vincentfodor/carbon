@@ -14,6 +14,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const cucumber = require('cypress-cucumber-preprocessor').default;
 
+// eslint-disable-next-line no-underscore-dangle
+require('events').EventEmitter.defaultMaxListeners = 66;
+
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
   on('file:preprocessor', cucumber());

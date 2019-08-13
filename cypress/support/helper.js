@@ -3,17 +3,20 @@ import {
 } from '../locators';
 import { DEBUG_FLAG } from '.';
 
+// const preprocessor = require('cypress-cucumber-preprocessor').default;
+
 let FIRST_TEST_FLAG = true;
 
-beforeEach(() => {
-  Cypress.setMaxListeners(66);
-});
+// const preprocessor = require('cypress-cucumber-preprocessor');
 
 afterEach(() => {
   FIRST_TEST_FLAG = false;
-  cy.task('log', `Cypress events >> ${Cypress.eventNames()}`);
-  cy.task('log', `Cypress listeners >> ${Cypress.listeners()}`);
+  // cy.task('log', `Cypress events >> ${Cypress.eventNames()}`);
+  // cy.task('log', `Cypress listeners >> ${Cypress.listeners()}`);
   cy.task('log', `Cypress listenerCount() >> ${Cypress.listenerCount()}`);
+  // cy.task('preprocessor:close');
+  // preprocessor.close();
+  // cy.task('log', '>>>>>> c.close ');
 });
 
 function prepareUrl(component, suffix, iFrameOnly) {
