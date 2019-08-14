@@ -5,6 +5,14 @@ services:
     ipc: host ## Prevent Docker Crash in Cypress (https://github.com/cypress-io/cypress/issues/350)
     image: carbon_cypress
     container_name: cypress
-    command: bash -c 'npm run storybook-ci </dev/null &>/dev/null &'
+    command: bash -c 'wait-on http://storybook:9001 && sleep 1000'
     environment:
       CYPRESS_baseUrl: http://storybook:9001/
+    depends_on:
+      - storybook
+    # volumes:
+    #   - './cypress/screenshots/:/usr/src/app/cypress/screenshots/'
+  storybook:
+    image: carbon_cypress
+    container_name: storybook
+    command: bash -c 'npm run storybook-ci'
