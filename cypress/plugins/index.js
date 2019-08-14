@@ -15,11 +15,11 @@
 const cucumber = require('cypress-cucumber-preprocessor').default;
 
 // eslint-disable-next-line no-underscore-dangle
-require('events').EventEmitter.defaultMaxListeners = 66;
+require('events').EventEmitter.defaultMaxListeners = 80; // 80 autotests features
 
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
-  on('file:preprocessor', cucumber());
+  on('file:preprocessor', cucumber(), console.log('>>> file:preprocessor'));
   on('task', {
     log(message) {
       console.log(message);

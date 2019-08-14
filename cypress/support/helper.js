@@ -6,17 +6,24 @@ import { DEBUG_FLAG } from '.';
 // const preprocessor = require('cypress-cucumber-preprocessor').default;
 
 let FIRST_TEST_FLAG = true;
+// eslint-disable-next-line no-undef
+const emitter = require('events').EventEmitter;
 
-// const preprocessor = require('cypress-cucumber-preprocessor');
+emitter.defaultMaxListeners = 102;
+
+Cypress.defaultMaxListeners = 99;
+beforeEach(() => {
+  cy.task('log', ` before defaultMaxListeners >> ${emitter.defaultMaxListeners}`);
+});
 
 afterEach(() => {
   FIRST_TEST_FLAG = false;
-  // cy.task('log', `Cypress events >> ${Cypress.eventNames()}`);
-  // cy.task('log', `Cypress listeners >> ${Cypress.listeners()}`);
-  cy.task('log', `Cypress listenerCount() >> ${Cypress.listenerCount()}`);
-  // cy.task('preprocessor:close');
+  // cy.console('log', `Cypress events >> ${Cypress.eventNames()}`);
+  // cy.console('log', `Cypress listeners >> ${Cypress.listeners()}`);
+  cy.task('log', `after defaultMaxListeners >> ${emitter.defaultMaxListeners}`);
+  // cy.console('preprocessor:close');
   // preprocessor.close();
-  // cy.task('log', '>>>>>> c.close ');
+  // cy.console('log', '>>>>>> c.close ');
 });
 
 function prepareUrl(component, suffix, iFrameOnly) {
