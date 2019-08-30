@@ -10,7 +10,6 @@ export default create({
   appBg: '#F2F4F5',
   appContentBg: 'white',
   appBorderColor: '#ccd6db',
-  appBorderRadius: 0,
 
   // Typography
   fontBase: '"Lato", sans-serif',
@@ -32,6 +31,6 @@ export default create({
   inputBorderRadius: 0,
 
   brandTitle: 'Sage DLS in Carbon',
-  brandUrl: 'https://carbon.sage.com',
+  brandUrl: 'https://carbon.sage.com', 
   brandImage: 'carbon-by-sage-logo.png',
 });
