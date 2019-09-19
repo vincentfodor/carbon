@@ -43,8 +43,9 @@ As Carbon is just React components, we support any test suite you prefer to use.
 * Use [renogen](https://github.com/DDAZZA/renogen), or add a yml file manually to `./changelog/next` e.g. `./changelog/next/my-update.yml`.
 * Update or add an appropriate heading in the style shown below for each change:
 ```
-Bug Fixes: "Modal: The Modal is now centered in the browser."
+Bug Fixes: "Fixes browser position. (Component: Modal)"
 ```
+> Note: The [.renogen](.renogen) file in the project root holds a list of commit message types that can be used.
 
 ## Technologies
 
