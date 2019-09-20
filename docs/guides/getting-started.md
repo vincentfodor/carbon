@@ -35,15 +35,19 @@ Carbon provides some baseline CSS which is applied to `body` and other elements.
 import 'carbon-react/lib/utils/css';
 ```
 
+### Brand new components
+
+We have added few brand new components such as `Card`, `Select` and `Tile`.
+
 ### Experimental components
 
-Some components in Carbon v9 currently sit in folder `src/__experimental__/`. These components are no longer wrapped by the InputDecorator. They will be moved into the core `src/components` directory in a future release.
+Some components in Carbon v9 currently sit in folder `src/__experimental__/`. These components are no longer wrapped by the InputDecorator. They will be moved into the core `src/components/` directory in a future release.
 
 ### Deprecated components
 
-in Carbon v9 the following components have been deprecated and can now be found in `src/__deprecated__`. 
+in Carbon v9 the following components have been deprecated and can now be found in `src/__deprecated__/`.
 * Checkbox
-* DateInput 
+* DateInput
 * DateRange
 * Decimal
 * Dropdown
