@@ -42,6 +42,9 @@ Some components in Carbon v9 currently sit in folder `src/__experimental__/`. Th
 ### Deprecated components
 
 in Carbon v9 the following components have been deprecated and can now be found in `src/__deprecated__`. 
+* Checkbox
+* DateInput 
+* DateRange
 * Decimal
 * Dropdown
 * DropdownFilter
@@ -52,5 +55,6 @@ in Carbon v9 the following components have been deprecated and can now be found 
 * Number
 * Pod
 * Spinner
+* Switch
 * Textarea
 * Textbox
