@@ -34,3 +34,23 @@ Carbon provides some baseline CSS which is applied to `body` and other elements.
 ```
 import 'carbon-react/lib/utils/css';
 ```
+
+### Experimental components
+
+Some components in Carbon v9 currently sit in folder `src/__experimental/`. These components are no longer wrapped by the InputDecorator. They will be moved into the core `src/components` directory in a future release.
+
+### Deprecated components
+
+in Carbon v9 the following components have been deprecated and can now be found in `src/__deprecated__`. 
+* Decimal
+* Dropdown
+* DropdownFilter
+* DropdownFilterAjax
+* Fieldset
+* Form
+* GroupedCharacter
+* Number
+* Pod
+* Spinner
+* Textarea
+* Textbox
