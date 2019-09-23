@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, text, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
@@ -32,6 +32,8 @@ const additionalFormActions = (innerText) => {
     )
   };
 };
+let renderTextbox = true;
+const r = React.createRef();
 
 function makeStory(name, themeSelector) {
   const component = () => {
@@ -56,43 +58,55 @@ function makeStory(name, themeSelector) {
     const showSummary = boolean('showSummary', FormWithoutValidations.defaultProps.showSummary);
     const inLineLabels = boolean('inLineLabels', false);
     const isLabelRightAligned = inLineLabels ? boolean('isLabelRightAligned', false) : undefined;
-
     return (
-      <Form
-        unsavedWarning={ unsavedWarning }
-        cancel={ cancel }
-        buttonAlign={ buttonAlign }
-        saving={ saving }
-        stickyFooter={ stickyFooter }
-        stickyFooterPadding={ stickyFooterPadding }
-        autoDisable={ autoDisable }
-        cancelText={ cancelText }
-        saveText={ saveText }
-        save={ save }
-        additionalActions={ additionalFormActions('Additional Action')[additionalActions] }
-        leftAlignedActions={ additionalFormActions('Left Action')[leftAlignedActions] }
-        rightAlignedActions={ additionalFormActions('Right Action')[rightAlignedActions] }
-        showSummary={ showSummary }
-        onSubmit={ () => {
-          window.location.href = window.location.href;
+      <div>
+        <Form
+          ref={ r }
+          unsavedWarning={ unsavedWarning }
+          cancel={ cancel }
+          buttonAlign={ buttonAlign }
+          saving={ saving }
+          stickyFooter={ stickyFooter }
+          stickyFooterPadding={ stickyFooterPadding }
+          autoDisable={ autoDisable }
+          cancelText={ cancelText }
+          saveText={ saveText }
+          save={ save }
+          additionalActions={ additionalFormActions('Additional Action')[additionalActions] }
+          leftAlignedActions={ additionalFormActions('Left Action')[leftAlignedActions] }
+          rightAlignedActions={ additionalFormActions('Right Action')[rightAlignedActions] }
+          showSummary={ showSummary }
+          onSubmit={ () => {
+            window.location.href = window.location.href;
+          } }
+          isLabelRightAligned={ isLabelRightAligned }
+        >
+          {
+            renderTextbox && (
+              <Textbox
+                key='0'
+                label='Full Name'
+                labelInline={ inLineLabels }
+                labelAlign='right'
+                validations={ [new PresenceValidation()] }
+              />
+            )
+          }
+          <Textbox
+            key='1'
+            label='Role'
+            labelInline={ inLineLabels }
+            labelAlign='right'
+            isOptional
+          />
+        </Form>
+        <Button onClick={ () => {
+          renderTextbox = false; console.log(r.current);
         } }
-        isLabelRightAligned={ isLabelRightAligned }
-      >
-        <Textbox
-          key='0'
-          label='Full Name'
-          labelInline={ inLineLabels }
-          labelAlign='right'
-          validations={ [new PresenceValidation()] }
-        />
-        <Textbox
-          key='1'
-          label='Role'
-          labelInline={ inLineLabels }
-          labelAlign='right'
-          isOptional
-        />
-      </Form>
+        >
+        CLICK ME
+        </Button>
+      </div>
     );
   };
 

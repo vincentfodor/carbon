@@ -16,13 +16,27 @@ const withValidations = (WrappedComponent) => {
     inputs = {};
 
     addInput = (name, validate) => {
+      /**
+       * addInput = (name, validate, counts)...
+       * Propose changing this to {
+       *  name: {
+       *    validate,
+       *    counts
+       *  }
+       * }
+       */
       this.inputs[name] = validate;
     };
 
     removeInput = (name) => {
+      this.setState({ errorCount: 0, warningCount: 0, infoCount: 0 });
+
       delete this.inputs[name];
+
+      this.validateRegisteredInputs();
     }
 
+    // adjustCount(name, type, hasFailed)...
     adjustCount = (type, hasFailed) => {
       const TYPES = Object.keys(VALIDATION_TYPES);
 
@@ -33,7 +47,9 @@ const withValidations = (WrappedComponent) => {
       const stateProp = `${type}Count`;
       const adjustment = hasFailed ? 1 : -1;
 
-      this.setState(prev => ({ [stateProp]: prev[stateProp] + adjustment }));
+      if (adjustment === 1 || (this.state[stateProp] > 0 && adjustment === -1)) {
+        this.setState(prev => ({ [stateProp]: prev[stateProp] + adjustment }));
+      }
     }
 
     getContext() {
